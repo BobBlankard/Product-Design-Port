@@ -199,6 +199,19 @@ let pinhausHiwMobileDisplayedStep = null;
 /** While non-null, a step label transition is in flight toward this step (prevents restart every tick). */
 let pinhausHiwMobileCaptionAnimatingTo = null;
 let pinhausHiwMobileCaptionToken = 0;
+let pinhausHiwPrefetchStarted = false;
+
+function prefetchPinhausHiwFrames() {
+  if (pinhausHiwPrefetchStarted) {
+    return;
+  }
+  pinhausHiwPrefetchStarted = true;
+  PINHAUS_HIW_FRAME_SRCS.forEach((src) => {
+    const img = new Image();
+    img.decoding = "async";
+    img.src = src;
+  });
+}
 
 function pinhausHiwGetStepLabel(root, step) {
   const li = root.querySelector(
@@ -765,6 +778,7 @@ function initPinhausHowItWorks() {
   if (!pinhausHiwRoot) {
     return;
   }
+  prefetchPinhausHiwFrames();
 
   if (prefersReducedMotion) {
     pinhausHiwRoot.dataset.reducedMotion = "true";
