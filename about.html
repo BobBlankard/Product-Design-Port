@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - Owen Doherty</title>
+    <meta
+      name="description"
+      content="About Owen Doherty, product designer and full-stack developer."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-theme="light">
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="container nav-row">
+        <a
+          href="./index.html"
+          class="nav-back-btn"
+          aria-label="Back to home"
+          data-magnetic
+        >
+          <span aria-hidden="true">←</span>
+          <span>Back</span>
+        </a>
+        <nav class="site-nav">
+          <a
+            href="file:///Users/owendoherty/Documents/Doherty%20Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-magnetic
+            >Resume</a
+          >
+          <a href="./about.html" aria-current="page" data-magnetic>About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="about-page">
+      <section
+        class="section reveal"
+        data-theme="light"
+        data-theme-section
+      >
+        <div class="container about-hero">
+          <p class="eyebrow">About</p>
+          <h1 class="split-lines">
+            <span class="split-lines__line"
+              ><span class="split-lines__inner">Hey, I’m Owen.</span></span
+            >
+            <span class="split-lines__line"
+              ><span class="split-lines__inner"
+                >I design and build digital products.</span
+              ></span
+            >
+          </h1>
+        </div>
+      </section>
+
+      <section
+        class="section reveal"
+        data-theme="soft"
+        data-theme-section
+      >
+        <div class="container about-type-grid">
+          <p class="about-intro">
+            I like making things that feel simple, useful, and human.
+          </p>
+          <div class="about-body">
+            <p>
+              I recently graduated from SDSU, and most of my work sits between
+              product design, software engineering, and visual art. I enjoy
+              taking ideas from rough concepts all the way to shipped products.
+            </p>
+            <p>
+              I care a lot about flow - not just how a screen looks, but how
+              the full experience works over time. I focus on clear structure,
+              thoughtful interactions, and systems that can scale without
+              getting messy.
+            </p>
+            <p>
+              Outside of product work, I make art and built a 10k+ organic
+              audience through <strong>xtc.ngl</strong>. That creative side
+              influences my design style: strong typography, intentional
+              spacing, and attention to detail.
+            </p>
+            <p>
+              I am happiest working on real products with real users, especially
+              when design and engineering need to move together.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section reveal"
+        data-theme="mist"
+        data-theme-section
+      >
+        <div class="container about-stat-row">
+          <article class="surface-card">
+            <p class="eyebrow">Core Focus</p>
+            <h3>Product usability first</h3>
+            <p>
+              I optimize for products people understand quickly and keep using.
+            </p>
+          </article>
+          <article class="surface-card">
+            <p class="eyebrow">Build Stack</p>
+            <h3>Swift, Firebase, React, Next.js, Node</h3>
+            <p>Design decisions backed by implementation reality.</p>
+          </article>
+          <article class="surface-card">
+            <p class="eyebrow">Style</p>
+            <h3>Minimal, expressive, intentional</h3>
+            <p>Clean typography and subtle motion over visual noise.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"
+      defer
+    ></script>
+    <script src="./script.js" defer></script>
+  </body>
+  </html>

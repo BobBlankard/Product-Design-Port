@@ -1,0 +1,236 @@
+Context: Example Reference Site — Design By Brandin (designbybrandin.com)
+================================================================================
+Purpose: This document distills the *portable design and motion language* of the
+saved export so a new agent can replicate the *feel* on Owen’s portfolio without
+copying WordPress/Salient/Nectar implementation wholesale.
+
+Source files (local export — user machine):
+- HTML: .../Downloads/Design By Brandin – Creative Director, Designer, and AI Product Developer.html
+- Assets: .../Downloads/Design By Brandin – Creative Director, Designer, and AI Product Developer_files/
+
+Live site (canonical): https://designbybrandin.com/
+
+================================================================================
+1) WHAT THE EXAMPLE ACTUALLY IS (STACK)
+================================================================================
+- WordPress + Salient theme + WPBakery Page Builder + ThemeNectar “Nectar” elements.
+- Heavy use of custom CSS classes on rows/columns (padding in vw, full-height rows,
+  flex alignment, equal-height columns).
+- Animation triggers: Waypoints-style scroll (nectar-waypoints / “animated-in” classes).
+- Smooth scroll: Theme option `smooth_scroll: true` + HTML root class `lenis`
+  (Lenis smooth-scroll library is the industry-standard pairing for this pattern).
+- Optional: Flickity carousels, parallax layers, “sticky media” horizontal scroll
+  sections, fit-text headline scaling.
+
+Replication strategy for Owen’s site:
+- Do NOT recreate WPBakery markup. Rebuild the *patterns* in semantic HTML +
+  CSS variables + vanilla JS (or a small library like Lenis only).
+- Preserve Owen’s content rules: product-design portfolio, humble tone, locked
+  home hero unless Owen asks (see context.txt).
+
+================================================================================
+2) VISUAL LANGUAGE — COLOR, CONTRAST, SECTION IDENTITY
+================================================================================
+- Bold section backgrounds: e.g. full-viewport rows with solid fill `--row-bg-color`
+  (export uses strong orange `#E82B00` on some bands — **Owen explicitly does not
+  want orange**; treat that as a *layout* idea only. Use white / off-white / black
+  neutrals instead.)
+- “Midnight” / light-on-dark convention: sections with dark fills use `data-midnight`
+  and `.dark` column wrappers so typography and UI flip to light text.
+- Global page tint sync: root inline style sets `--nectar-page-background-color` to
+  match the active section color; transition duration ~0.8s
+  (`--page-color-change-section-transition-time: 0.8s`). Effect: the *overall*
+  page chrome/background feels tied to scroll position.
+- For Owen’s adaptation: **no orange**; stay on **white, black, greyish off-white,
+  and blur** (frosted surfaces, scroll blur). Optional section themes could shift
+  only between neutrals (e.g. off-white → soft grey field → black band for large
+  type). Use CSS `transition: background-color 0.75s ease` on `html`/`body` when a
+  section becomes “active” if desired — keep chroma at zero unless Owen requests a
+  tint. See `context.txt` for matte vs glossy black-on-black (large surfaces only).
+
+================================================================================
+3) TYPOGRAPHY
+================================================================================
+- Primary webfonts in export: Open Sans (300–700) + Roboto preload. Tone: clean
+  grotesque / humanist sans — highly legible, not decorative.
+- Fluid type: utility pattern `font-size: min(MAX_PX, max(MIN_PX, VW_UNIT))` e.g.
+  `min(250px, max(15px, 2vw))` for huge display lines; separate min/max caps for
+  tablet/phone via media queries.
+- Ultra-tight display line-height on heroes: ~0.85 (`line-height: 0.85`) on split
+  headings for stacked mega-type.
+- “Nectar split heading” behavior (replicate conceptually):
+  - Wrap each line/word in overflow-hidden containers.
+  - Initial state: inner text translated down (~1.2–1.3em) OR blurred +
+    slightly shifted up (~0.25em).
+  - On scroll into view: animate to translate 0, opacity 1, blur 0.
+  - Duration ~1–1.2s; easing `cubic-bezier(0.25, 1, 0.5, 1)` (smooth deceleration).
+  - Optional stagger: per-line or per-word delay.
+  - Optional “outline” headline: fill transparent + light text-shadow strokes
+    (`.outliner` pattern in export) for brutal/editorial contrast on dark fields.
+- “Fit text” / nowrap headlines: JS scales type to container width (nectar-fit-text).
+  Owen alternative: CSS `clamp()` + `vw` or a tiny Fitty-style script if needed.
+
+================================================================================
+4) COMPOSITION & WHITESPACE
+================================================================================
+- Full-viewport sections: `min-height: 100vh` / `100svh` rows; content vertically
+  aligned with flex (`columns-bottom`, `content-top`, equal-height columns).
+- Horizontal breathing room: row padding often `left/right 4vw` or `40px`, sometimes
+  `15%` side padding on large screens — content never hugs the viewport edge.
+- Dividers as compositional elements: 1px lines with scroll-draw animation
+  (`transform: scaleX(0)` → `scaleX(1)`, transform-origin left, ~1s+ easing).
+- Lists / footers: multi-column grids that collapse on tablet/phone; subtle
+  borders between cells (`border-color` with low alpha).
+
+================================================================================
+5) SCROLL & MOTION SYSTEM
+================================================================================
+A) Smooth scrolling (Lenis)
+- Adds weighted inertia; pairs well with scroll-linked animations.
+- Root element gets class `lenis`; sync `requestAnimationFrame` with `lenis.raf`.
+- Disable or reduce on `prefers-reduced-motion`.
+
+B) Scroll-triggered reveals
+- Elements start hidden (opacity 0, clipped, translated, or blurred).
+- When section enters viewport: add `.animated-in` / `.is-visible`; optionally
+  unobserve after first play.
+- Use IntersectionObserver with threshold ~0.1–0.2 and `rootMargin` to trigger
+  slightly before fully on screen (feels premium).
+
+C) Parallax & depth
+- Column backgrounds and video rows use transform-based parallax (not background-
+  attachment fixed on mobile — export forces scroll attachment on small screens).
+- “Parallax scene” layers: oversized background divs (~120% width) with 3D-style
+  translate — subtle depth without nausea.
+
+D) Sticky storytelling
+- Sticky column (`position: sticky; top: var(--sticky-offset)`) so one column
+  pins while the other scrolls (case studies, long copy + media).
+- Horizontal “scrub” strips (vertical scroll driving horizontal translate) were
+  intentionally **not** used on Owen’s home — they slow intake; reserve sticky
+  for case-page copy+media columns if needed.
+
+E) Page / view transitions
+- Export references `view_transitions_effect: vertical-reveal` (View Transitions
+  API direction). Optional for MPA; not required for first parity pass.
+
+================================================================================
+6) LIST / GRID INTERACTIONS (PORTFOLIO LISTS)
+================================================================================
+- Vertical list rows with top/bottom rules; on scroll-in, rules draw with scaleX.
+- Hover on list item:
+  - Featured image can “follow” cursor in fixed position (small rounded preview).
+  - Text may shift horizontally (first child +1rem, last child -1rem) for tension.
+  - Optional color wash overlay (scaleY from bottom) on thumbnail area.
+  - Title uses animated gradient mask (`mask-image` linear sweep) for shimmer
+    reveal on hover or on enter.
+- Owen adaptation: simplify to CSS-only hover (scale, blur siblings, underline)
+  if avoiding heavy JS; keep the *principle*: one focal row, others recede.
+
+================================================================================
+7) MICRO-UI & ATMOSPHERE
+================================================================================
+- Fixed film grain / noise overlay: repeating texture, `pointer-events: none`,
+  very low opacity (~0.04), `z-index` high — adds tactile finish.
+- Custom cursor (small circle, `mix-blend-mode: difference`, scales on hover):
+  polarizing for accessibility; if used, hide on touch and when
+  `prefers-reduced-motion`.
+- Small “live” UI widgets: e.g. world clocks with pulsing dot (CSS keyframe
+  scale + opacity on pseudo-element) — signals global / always-on craft.
+- CTA buttons: pill + circular arrow icon; on hover, arrow translates diagonally,
+  circle clip-path tightens slightly; duration ~0.55s with custom cubic-bezier.
+
+================================================================================
+8) LAYOUT GRID CONVENTIONS (MAP TO OUR SITE)
+================================================================================
+- Section → full-width band with optional inner max-width.
+- Use `min-height: 100svh` for hero-like bands; Owen’s home hero stays as-is per
+  context.txt — apply full-viewport bands *below* hero or on case pages.
+- Prefer `gap` in flex/grid; use `clamp()` for section padding vertical:
+  e.g. `padding-block: clamp(4rem, 12vw, 10rem)`.
+- Align type to a consistent left (or centered) grid; avoid centered body copy
+  with left-aligned headlines unless intentional editorial tension.
+
+================================================================================
+9) PERFORMANCE & ACCESSIBILITY CHECKLIST
+================================================================================
+- Respect `prefers-reduced-motion`: disable Lenis smoothing, blur-in-headlines,
+  parallax, and custom cursor animations.
+- Ensure focus states remain visible (outline) if custom cursor is on.
+- Lazy-load images; prefer WebP; avoid huge autoplay video on mobile.
+- IntersectionObserver + one-time reveal prevents main-thread churn on long pages.
+- Noise overlay: use lightweight tiled PNG/WebP or CSS noise instead of huge GIF
+  if performance suffers.
+
+================================================================================
+10) IMPLEMENTATION CHECKLIST FOR OUR CODEBASE (PRACTICAL ORDER)
+================================================================================
+1. Add Lenis (or equivalent) + rAF loop; test with existing sticky header logic.
+2. Add `data-theme` / section markers; transition `body` or `html` background
+   and text tokens when active section changes (0.7–0.9s).
+3. Upgrade headline blocks to split-line markup + CSS/JS reveal (blur + Y).
+4. Increase section vertical padding to match “expensive” whitespace rhythm.
+5. Add optional fixed grain layer (low opacity).
+6. Case pages: sticky media column + scrolling copy column (already close — extend).
+7. Optional Phase 2: list hover preview, horizontal sticky scrub, View Transitions.
+
+================================================================================
+11) FILES IN EXPORT WORTH SKIMMING (NOT COPYING VERBATIM)
+================================================================================
+- `siteground-optimizer-combined-css-*.css` — compiled Salient + builder CSS.
+- `init.js` — Nectar front-end behaviors (scroll, headers, reveals).
+- `waypoints.js` — scroll trigger foundation.
+- `parallax.js` — parallax helpers.
+- `nectar-fit-text.js` — fluid headline fitting.
+- `flickity*.js` — carousels.
+
+================================================================================
+12) RELATIONSHIP TO OWEN’S EXISTING CONTEXT
+================================================================================
+- Aligns with: empty space as hierarchy, brutal/abstract type, blur/slide reveals,
+  scroll richness, premium restraint.
+- **Palette divergence:** Brandin uses bold orange fills; Owen’s site is **white,
+  black, greyish off-white, and blur** — borrow scroll/composition only, not hue.
+- Divergence to manage: example site is brand-design positioning; Owen’s is product
+  design — keep motion grammar, simplify decorative cursor/grain if they distract
+  from case-study clarity.
+- Legal: do not copy proprietary assets, copy, or unique Brandin identity; only
+  patterns, timings, spacing philosophy, and interaction categories.
+
+Document version: 2026-03-24
+Derived from local static export analysis + visible inline CSS/JS configuration.
+
+================================================================================
+13) ALREADY WIRED IN THIS REPO (AS OF 2026-03-24)
+================================================================================
+- Lenis 1.1.x loaded from jsDelivr before `script.js` on index / about / case pages.
+- `script.js` initializes Lenis when `prefers-reduced-motion` is not set; falls
+  back to native scroll if the CDN fails or Lenis is undefined.
+- Header + parallax updates run on Lenis’s `scroll` event when active.
+- Page field: **#fff**; optional **section--tint** band uses `--section-tint`.
+- **Split-line headlines** (`.split-lines` + `.split-lines-enhanced` + IO): blur →
+  sharp line reveal with stagger (home, footer, case “Key features”, about hero).
+- **Scroll progress** bar (`.scroll-progress`, top edge).
+- **Film grain** overlay (`.grain-overlay`, low opacity; off when reduced motion).
+- **Section dividers** (`.section-divider` + `.section-divider__line`): line draws
+  with scaleX on reveal.
+- **`data-theme` canvas crossfade:** `html` + `body` share `data-theme` (`light` |
+  `soft` | `mist`) driven by whichever `[data-theme-section]` is nearest the focal
+  line (~38% viewport height). **~0.78s** ease on `html` `--canvas` background.
+  (No full-page “ink” flip — dark footer is local: `.site-footer--dark` +
+  `.band-black-gloss`.)
+- **Magnetic links:** `[data-magnetic]` on brand, nav, case-study arrows, footer
+  rows — subtle `translate3d` toward cursor; **fine pointer + hover** only;
+  disabled when `prefers-reduced-motion`.
+- **Home flow:** vertical scroll only between work → skills → about (no horizontal
+  scrub / sticky-rail section — keeps the page fast and “show, don’t explain”).
+- **Sticky chapter numerals:** `[data-sticky-chapter]` sections use a left rail
+  with `position: sticky` on a huge blurred index (01–04). The number stays
+  pinned while its *parent section* scrolls through the viewport, then moves
+  away when the section ends — same idea as the reference site’s oversized
+  section markers, without horizontal scrub.
+  - **Chrome / layout:** the grid shell uses `align-items: stretch` so the rail
+    column is as tall as the content column (otherwise sticky has no travel).
+  - **Do not** put `transform` (e.g. `.reveal` scroll animation) on the same
+    element that wraps the sticky rail — it breaks `position: sticky`. Reveal
+    classes sit on `.home-section__flow` / `.footer-home` only, not the `<section>`.

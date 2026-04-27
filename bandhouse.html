@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BandHouse Case Study - Owen Doherty</title>
+    <meta
+      name="description"
+      content="BandHouse case study by Owen Doherty: an iOS app for local live music discovery with a map and chronological feed."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-theme="light">
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="container nav-row nav-row--case-shell">
+        <div class="nav-row__pill-stack">
+          <div class="nav-row__invert-shell">
+        <a
+          href="./index.html"
+          class="nav-back-btn"
+          aria-label="Back to home"
+          data-magnetic
+          ><span aria-hidden="true">←</span><span>Back</span></a
+        >
+        <nav class="site-nav">
+          <a
+            href="file:///Users/owendoherty/Documents/Doherty%20Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-magnetic
+            >Resume</a
+          >
+          <a href="./about.html" data-magnetic>About</a>
+        </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="case-page case-page--editorial case-page--bandhouse">
+      <!-- Hero -->
+      <section
+        class="section case-hero-editorial reveal reveal-rich"
+        data-theme="light"
+        data-theme-section
+      >
+        <div class="case-hero-editorial__title-bleed">
+          <div class="case-hero-editorial__title-stack">
+            <h1 class="case-hero-editorial__word split-lines">
+              <span class="split-lines__line"
+                ><span class="split-lines__inner">BandHouse</span></span
+              >
+            </h1>
+            <div
+              class="case-hero-editorial__segments"
+              aria-label="BandHouse hero metadata"
+            >
+              <span>Live music discovery</span>
+              <span>Case study</span>
+              <span>2024 · ongoing</span>
+              <span>iOS · Swift · Firebase</span>
+            </div>
+          </div>
+        </div>
+        <div class="container container--case">
+          <div class="case-hero-editorial__statement case-hero-editorial__statement--split">
+            <p
+              class="case-hero-editorial__statement-text case-editorial-statement-text"
+            >
+              An iOS app I built so local shows are easier to find, place on a map, and follow in
+              real time instead of chasing stories and screenshots.
+            </p>
+            <nav
+              class="case-hero-editorial__toc"
+              aria-label="Jump to a section in this case study"
+            >
+              <a href="#bandhouse-overview">Overview</a>
+              <a href="#bandhouse-the-problem">The problem</a>
+              <a href="#bandhouse-solution">Solution</a>
+              <a href="#bandhouse-surface">The Bandhouse App</a>
+              <a href="#bandhouse-design">Design approach</a>
+              <a href="#bandhouse-outcome">Outcome</a>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <!-- Product -->
+      <section
+        id="bandhouse-product"
+        class="section reveal reveal-rich"
+        data-theme="soft"
+        data-theme-section
+      >
+        <div class="container container--case">
+          <figure
+            class="case-phone-mock case-asset"
+            data-cursor-parallax="22"
+            aria-label="BandHouse on iPhone: profile, map, and feed"
+          >
+            <div class="case-phone-mock__stack">
+              <div class="case-phone-mock__bg" aria-hidden="true"></div>
+              <img
+                class="case-phone-mock__phones"
+                src="./Phone%20Mock%20up.png"
+                alt="Three iPhone screens showing BandHouse profile with calendar, map with pins, and local shows feed."
+                width="1600"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Overview -->
+      <section
+        id="bandhouse-overview"
+        class="section case-study-band case-study-band--prose case-overview-split reveal reveal-rich reveal-stagger"
+        data-theme="light"
+        data-theme-section
+      >
+        <div class="container container--case case-overview-split__inner">
+          <h2
+            class="case-h2 split-lines reveal-child case-overview-split__title"
+            id="bandhouse-overview-heading"
+          >
+              <span class="split-lines__line"
+              ><span class="split-lines__inner">Overview</span></span
+              >
+            </h2>
+          <div class="case-overview-split__body">
+            <p
+              class="case-overview-split__lede case-editorial-statement-text reveal-child"
+            >
+              I spend a lot of time around local music: small venues, house shows, flyers in group
+              chats. The shows are there, but the information is not in one dependable layer.
+            </p>
+            <p
+              class="case-overview-split__footnote case-editorial-statement-text reveal-child"
+            >
+              BandHouse is the product I am building to fix that. It is a map-first iOS app with a
+              chronological feed so you can see when and where shows are happening near you and who
+              is playing, then plan a night out without digging through five different surfaces.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider reveal" aria-hidden="true">
+        <span class="section-divider__line"></span>
+      </div>
+
+      <!-- THE PROBLEM: scroll-scrubbed simplified “feed” (no transform on outer section: sticky) -->
+      <section
+        id="bandhouse-the-problem"
+        class="section bandhouse-ig-problem"
+        data-bandhouse-ig-problem
+        data-theme="light"
+        data-theme-section
+        aria-labelledby="bandhouse-the-problem-heading"
+      >
+        <div class="bandhouse-ig-problem__rail">
+          <div class="bandhouse-ig-problem__sticky">
+            <h2 id="bandhouse-the-problem-heading" class="bandhouse-ig-problem__title">
+              THE PROBLEM
+            </h2>
+
+            <div class="bandhouse-ig-problem__device">
+              <div
+                class="bandhouse-ig-problem__viewport"
+                data-bandhouse-ig-viewport
+                role="region"
+                aria-label="Simplified feed preview driven by page scroll"
+              >
+                <div class="bandhouse-ig-problem__feed-app" data-bandhouse-feed-app>
+                  <div class="bandhouse-ig-problem__ig-topbar" aria-hidden="true">
+                    <span class="bandhouse-ig-problem__ig-plus">+</span>
+                    <span class="bandhouse-ig-problem__ig-logo">Instagram</span>
+                    <span class="bandhouse-ig-problem__ig-heart">♡</span>
+                  </div>
+                  <div class="bandhouse-ig-problem__track" data-bandhouse-ig-track>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar" aria-hidden="true"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--xs"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--lead">
+                      <div class="bandhouse-ig-problem__finale-media-inner">
+                        <p class="bandhouse-ig-problem__finale-lede">
+                          SHOW HAPPENING NEXT MONTH!
+                        </p>
+                      </div>
+                    </div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line"></span>
+                      <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--md"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--xs"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--f0">
+                      <div class="bandhouse-ig-problem__flyer" aria-hidden="true">
+                        <span class="bandhouse-ig-problem__flyer-kicker">house show</span>
+                        <span class="bandhouse-ig-problem__flyer-main">HAPPENING NEXT MONTH</span>
+                        <span class="bandhouse-ig-problem__flyer-sub">northside basement</span>
+                      </div>
+                    </div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--md"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--f1">
+                      <div class="bandhouse-ig-problem__flyer" aria-hidden="true">
+                        <span class="bandhouse-ig-problem__flyer-kicker">local bill</span>
+                        <span class="bandhouse-ig-problem__flyer-main">HAPPENING IN 3 WEEKS</span>
+                        <span class="bandhouse-ig-problem__flyer-sub">5 bands · 9pm</span>
+                      </div>
+                    </div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--xs"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--f2">
+                      <div class="bandhouse-ig-problem__flyer" aria-hidden="true">
+                        <span class="bandhouse-ig-problem__flyer-kicker">all ages</span>
+                        <span class="bandhouse-ig-problem__flyer-main">HAPPENING IN 2 WEEKS</span>
+                        <span class="bandhouse-ig-problem__flyer-sub">bring cash for door</span>
+                      </div>
+                    </div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--md"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--f3">
+                      <div class="bandhouse-ig-problem__flyer" aria-hidden="true">
+                        <span class="bandhouse-ig-problem__flyer-kicker">warehouse set</span>
+                        <span class="bandhouse-ig-problem__flyer-main">HAPPENING NEXT WEEK</span>
+                        <span class="bandhouse-ig-problem__flyer-sub">dm for address</span>
+                      </div>
+                    </div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--xs"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--f4">
+                      <div class="bandhouse-ig-problem__flyer" aria-hidden="true">
+                        <span class="bandhouse-ig-problem__flyer-kicker">indie night</span>
+                        <span class="bandhouse-ig-problem__flyer-main">HAPPENING THIS WEEK</span>
+                        <span class="bandhouse-ig-problem__flyer-sub">doors 8 · sets at 9</span>
+                      </div>
+                    </div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--f5">
+                      <div class="bandhouse-ig-problem__flyer" aria-hidden="true">
+                        <span class="bandhouse-ig-problem__flyer-kicker">tonight plans</span>
+                        <span class="bandhouse-ig-problem__flyer-main">HAPPENING TONIGHT</span>
+                        <span class="bandhouse-ig-problem__flyer-sub">last post before it starts</span>
+                      </div>
+                    </div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--md"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--xs"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--f0"></div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--f1"></div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--md"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--xs"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--f2"></div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--f3"></div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--md"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--xs"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--f4"></div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--f5"></div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--md"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--xs"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--f0"></div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--compact" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--f1"></div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--md"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--blur" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--xs"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--b"></div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--blur" aria-hidden="true">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--c"></div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--md"></span>
+                    </footer>
+                  </article>
+                  <article class="bandhouse-ig-problem__post bandhouse-ig-problem__post--finale">
+                    <header class="bandhouse-ig-problem__post-head">
+                      <span class="bandhouse-ig-problem__avatar" aria-hidden="true"></span>
+                      <div class="bandhouse-ig-problem__post-meta">
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--sm"></span>
+                        <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--xs"></span>
+                      </div>
+                    </header>
+                    <div class="bandhouse-ig-problem__media bandhouse-ig-problem__media--finale">
+                      <div class="bandhouse-ig-problem__finale-media-inner">
+                        <p class="bandhouse-ig-problem__finale-lede">
+                          This is the show happening tonight
+                        </p>
+                      </div>
+                    </div>
+                    <footer class="bandhouse-ig-problem__post-foot">
+                      <span class="bandhouse-ig-problem__line"></span>
+                      <span class="bandhouse-ig-problem__line bandhouse-ig-problem__line--md"></span>
+                    </footer>
+                  </article>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bandhouse-ig-problem__after">
+          <p class="bandhouse-ig-problem__finale-callout" data-bandhouse-finale-callout>
+            <span
+              class="bandhouse-ig-problem__finale-callout-lead"
+              data-bandhouse-stagger
+              style="--stagger-step: 122ms; --stagger-base: 0ms"
+            >
+              SEEMS BACKWARDS RIGHT?
+            </span>
+            <span class="bandhouse-ig-problem__finale-callout-body">
+              TRYING TO FIND A SHOW FOR TONIGHT ONLY FOR IT TO BE A POST THEY MADE TWO MONTHS AGO.
+              (AND THIS IS ONLY IF YOU'RE IN THE SCENE AND KNOW THE RIGHT ACCOUNTS THAT ARE STILL
+              ACTIVE.)
+            </span>
+          </p>
+          <p class="bandhouse-ig-problem__finale-bridge">
+            <span
+              class="bandhouse-ig-problem__finale-bridge-lead"
+              data-bandhouse-stagger
+              style="--stagger-step: 88ms; --stagger-base: 0ms"
+              >BUT YOU DON'T KNOW THAT.</span
+            >
+            <span class="bandhouse-ig-problem__finale-bridge-body"
+              >YOU RELY ON YOUR FRIENDS FOR INVITES. LETS SEE HOW THAT GOES.</span
+            >
+          </p>
+          <div class="bandhouse-ig-problem__messages-app" data-bandhouse-messages-app>
+            <div
+              class="bandhouse-ig-sms"
+              data-bandhouse-imessage
+              aria-label="Text thread preview"
+              aria-live="polite"
+            >
+              <div class="bandhouse-ig-sms__topbar" aria-hidden="true">
+                <span class="bandhouse-ig-sms__carrier">9:41</span>
+                <span class="bandhouse-ig-sms__title">Messages</span>
+                <span class="bandhouse-ig-sms__topbar-spacer"></span>
+              </div>
+              <div class="bandhouse-ig-sms__body">
+                <div class="bandhouse-ig-sms__history" aria-hidden="true">
+                  <div class="bandhouse-ig-sms__date-pill">Last Friday</div>
+                  <div class="bandhouse-ig-sms__row bandhouse-ig-sms__row--in bandhouse-ig-sms__row--static">
+                    <div class="bandhouse-ig-sms__bubble bandhouse-ig-sms__bubble--in">
+                      we spent 20 minutes picking a show and still ended up at taco bell first
+                    </div>
+                  </div>
+                  <div class="bandhouse-ig-sms__row bandhouse-ig-sms__row--out bandhouse-ig-sms__row--static">
+                    <div class="bandhouse-ig-sms__bubble bandhouse-ig-sms__bubble--out">
+                      priorities were elite and honestly correct
+                    </div>
+                  </div>
+                  <div class="bandhouse-ig-sms__row bandhouse-ig-sms__row--in bandhouse-ig-sms__row--static">
+                    <div class="bandhouse-ig-sms__bubble bandhouse-ig-sms__bubble--in">
+                      anyway no repeats. can we find a real show tonight
+                    </div>
+                  </div>
+                </div>
+                <div class="bandhouse-ig-sms__stack">
+                  <div class="bandhouse-ig-sms__row bandhouse-ig-sms__row--out" data-imsg-step="1">
+                    <div class="bandhouse-ig-sms__bubble bandhouse-ig-sms__bubble--out">
+                      What's the move tonight?
+                    </div>
+                  </div>
+                  <div class="bandhouse-ig-sms__row bandhouse-ig-sms__row--out" data-imsg-step="2">
+                    <div class="bandhouse-ig-sms__bubble bandhouse-ig-sms__bubble--out">Any shows?</div>
+                  </div>
+                  <div class="bandhouse-ig-sms__row bandhouse-ig-sms__row--in" data-imsg-step="3">
+                    <div
+                      class="bandhouse-ig-sms__bubble bandhouse-ig-sms__bubble--typing"
+                      aria-label="Friend is typing"
+                    >
+                      <span class="bandhouse-ig-sms__dot" aria-hidden="true"></span>
+                      <span class="bandhouse-ig-sms__dot" aria-hidden="true"></span>
+                      <span class="bandhouse-ig-sms__dot" aria-hidden="true"></span>
+                    </div>
+                  </div>
+                  <div class="bandhouse-ig-sms__row bandhouse-ig-sms__row--in" data-imsg-step="4">
+                    <div class="bandhouse-ig-sms__bubble bandhouse-ig-sms__bubble--in">idk</div>
+                  </div>
+                </div>
+              </div>
+              <div class="bandhouse-ig-sms__composer" aria-hidden="true">
+                <span class="bandhouse-ig-sms__composer-placeholder">iMessage</span>
+                <span class="bandhouse-ig-sms__composer-chev" aria-hidden="true">⌄</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bandhouse-ig-problem__fallback" data-bandhouse-ig-fallback>
+          <h2 class="bandhouse-ig-problem__title">THE PROBLEM</h2>
+          <p>
+            Feeds bury the one post that matters. BandHouse is built so local shows are easier to
+            find without digging through five different surfaces.
+          </p>
+          <p class="bandhouse-ig-problem__finale-lede bandhouse-ig-problem__finale-text--static">
+            This is the show happening tonight
+          </p>
+          <p class="bandhouse-ig-problem__finale-sub">
+            but you didn't find it, so you text your friends. You ask what's the move, ask about
+            shows, see the typing bubble, then get "idk."
+          </p>
+        </div>
+      </section>
+
+      <section
+        class="section bandhouse-proof reveal reveal-rich"
+        id="bandhouse-proof"
+        data-theme="light"
+        data-theme-section
+      >
+        <div class="container container--case">
+          <h2 class="bandhouse-proof__title">DONT JUST TAKE IT FROM ME (WE DID 40+ INTERVIEWS)</h2>
+          <div class="bandhouse-proof__rows">
+            <article class="bandhouse-proof__row" data-bandhouse-stat-row data-bandhouse-stat-dir="right">
+              <div class="bandhouse-proof__metric">
+                <span class="bandhouse-proof__value">85</span>
+                <span class="bandhouse-proof__suffix">%</span>
+              </div>
+              <p class="bandhouse-proof__copy">
+                RELY ON WORD OF MOUTH TO FIND EVENTS.
+              </p>
+            </article>
+            <article class="bandhouse-proof__row" data-bandhouse-stat-row data-bandhouse-stat-dir="left">
+              <div class="bandhouse-proof__metric">
+                <span class="bandhouse-proof__value">90</span>
+                <span class="bandhouse-proof__suffix">%</span>
+              </div>
+              <p class="bandhouse-proof__copy">
+                THINK THE CURRENT LIVE MUSIC SCENE IS UNORGANIZED.
+              </p>
+            </article>
+            <article class="bandhouse-proof__row" data-bandhouse-stat-row data-bandhouse-stat-dir="right">
+              <div class="bandhouse-proof__metric">
+                <span class="bandhouse-proof__value">70</span>
+                <span class="bandhouse-proof__suffix">%</span>
+              </div>
+              <p class="bandhouse-proof__copy">
+                WANT TO ATTEND MORE SHOWS BUT DO NOT KNOW WHERE TO START.
+              </p>
+            </article>
+            <article class="bandhouse-proof__row" data-bandhouse-stat-row data-bandhouse-stat-dir="left">
+              <div class="bandhouse-proof__metric">
+                <span class="bandhouse-proof__value">100</span>
+                <span class="bandhouse-proof__suffix">%</span>
+              </div>
+              <p class="bandhouse-proof__copy">
+                OF THOSE 18-20 RELY ON CONCERTS FOR SOCIAL REASONS. (THIRD SPACES ARE
+                DISAPPEARING SORRY WE HAD TO MAKE ROOM FOR APARTMENT COMPLEXES)
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Solution -->
+      <section
+        class="section case-study-band case-study-band--prose reveal reveal-rich reveal-stagger reveal--eager"
+        data-theme="soft"
+        data-theme-section
+      >
+        <div class="container container--case">
+          <h2
+            id="bandhouse-solution"
+            class="case-h2 case-h2--spaced case-h2--center split-lines reveal-child"
+          >
+            <span class="split-lines__line"><span class="split-lines__inner">Solution</span></span>
+            </h2>
+          <div class="bandhouse-solution-feed" data-bandhouse-solution-feed>
+            <div class="bandhouse-solution-feed__rail">
+              <div class="bandhouse-solution-feed__sticky">
+                <div class="bandhouse-solution-feed__device">
+                  <div class="bandhouse-solution-feed__topbar">
+                    <span class="bandhouse-solution-feed__topbar-spacer" aria-hidden="true"></span>
+                    <span class="bandhouse-solution-feed__title">BandHouse</span>
+                    <span class="bandhouse-solution-feed__filter" aria-hidden="true">⟍⟋</span>
+                  </div>
+                  <div class="bandhouse-solution-feed__viewport" data-bandhouse-solution-viewport>
+                    <div class="bandhouse-solution-feed__track" data-bandhouse-solution-track>
+                      <article class="bandhouse-solution-feed__post">
+                        <div class="bandhouse-solution-feed__flyer">THIS IS THE SHOW HAPPENING TONIGHT</div>
+                        <div class="bandhouse-solution-feed__meta">
+                          <span>TONIGHT</span>
+                          <span>2.4 MI</span>
+                        </div>
+                        <div class="bandhouse-solution-feed__actions">
+                          <button type="button">TICKETS AT DOOR</button>
+                          <span aria-hidden="true">↗</span>
+                        </div>
+                      </article>
+                      <article class="bandhouse-solution-feed__post">
+                        <div class="bandhouse-solution-feed__flyer">THIS IS ALSO A SHOW HAPPENING TONIGHT</div>
+                        <div class="bandhouse-solution-feed__meta">
+                          <span>TONIGHT</span>
+                          <span>4.1 MI</span>
+                        </div>
+                        <div class="bandhouse-solution-feed__actions">
+                          <button type="button">TICKETS AT DOOR</button>
+                          <span aria-hidden="true">↗</span>
+                        </div>
+                      </article>
+                      <article class="bandhouse-solution-feed__post">
+                        <div class="bandhouse-solution-feed__flyer">THIS IS TOMORROW</div>
+                        <div class="bandhouse-solution-feed__meta">
+                          <span>1 DAY AWAY</span>
+                          <span>3.2 MI</span>
+                        </div>
+                        <div class="bandhouse-solution-feed__actions">
+                          <button type="button">TICKETS AT DOOR</button>
+                          <span aria-hidden="true">↗</span>
+                        </div>
+                      </article>
+                      <article class="bandhouse-solution-feed__post">
+                        <div class="bandhouse-solution-feed__flyer">THIS IS ALSO TOMORROW</div>
+                        <div class="bandhouse-solution-feed__meta">
+                          <span>1 DAY AWAY</span>
+                          <span>6.8 MI</span>
+                        </div>
+                        <div class="bandhouse-solution-feed__actions">
+                          <button type="button">TICKETS AT DOOR</button>
+                          <span aria-hidden="true">↗</span>
+                        </div>
+                      </article>
+                      <article class="bandhouse-solution-feed__post">
+                        <div class="bandhouse-solution-feed__flyer">THIS IS NEXT WEEK</div>
+                        <div class="bandhouse-solution-feed__meta">
+                          <span>7 DAYS AWAY</span>
+                          <span>5.6 MI</span>
+                        </div>
+                        <div class="bandhouse-solution-feed__actions">
+                          <button type="button">TICKETS AT DOOR</button>
+                          <span aria-hidden="true">↗</span>
+                        </div>
+                      </article>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bandhouse-solution-feed__after">
+            <p class="bandhouse-solution-feed__after-lead">
+              Simple really,
+            </p>
+            <p class="bandhouse-solution-feed__after-body">
+              just make it chronological and now its much easier to make plans. We also allow easy
+              access to buy tickets on our app.
+            </p>
+            <div class="bandhouse-solution-feed__map-row">
+              <p class="bandhouse-solution-feed__after-map-intro">
+                <span class="bandhouse-solution-feed__after-map-intro-lead"
+                  >WE ALSO LISTENED TO OUR EARLY ADOPTERS.</span
+                >
+                <span class="bandhouse-solution-feed__after-map-intro-body"
+                  >THEY WANTED TO KNOW WHERE SHOWS WERE RELATIVE TO WHERE THEY ARE, SO WE MADE IT
+                  HAPPEN.</span
+                >
+              </p>
+              <div class="bandhouse-solution-map" role="img" aria-label="BandHouse map view with date color pins">
+                <div class="bandhouse-solution-map__status" aria-hidden="true">
+                  <span>1:49</span>
+                </div>
+                <div class="bandhouse-solution-map__pins" aria-hidden="true">
+                  <span class="bandhouse-solution-map__you" style="top: 50%; left: 50%">
+                    <span class="bandhouse-solution-map__you-ring"></span>
+                    <span class="bandhouse-solution-map__you-dot"></span>
+                    <span class="bandhouse-solution-map__you-label">YOU ARE HERE</span>
+                  </span>
+                  <span class="bandhouse-solution-map__pin bandhouse-solution-map__pin--today" style="top: 31%; left: 30%"></span>
+                  <span class="bandhouse-solution-map__pin bandhouse-solution-map__pin--tomorrow" style="top: 33%; left: 67%"></span>
+                  <span class="bandhouse-solution-map__pin bandhouse-solution-map__pin--week" style="top: 45%; left: 24%"></span>
+                  <span class="bandhouse-solution-map__pin bandhouse-solution-map__pin--today" style="top: 44%; left: 74%"></span>
+                  <span class="bandhouse-solution-map__pin bandhouse-solution-map__pin--next" style="top: 60%; left: 28%"></span>
+                  <span class="bandhouse-solution-map__pin bandhouse-solution-map__pin--week" style="top: 63%; left: 70%"></span>
+                  <span class="bandhouse-solution-map__pin bandhouse-solution-map__pin--next" style="top: 72%; left: 50%"></span>
+                </div>
+                <div class="bandhouse-solution-map__legend" aria-hidden="true">
+                  <p>Pin Colors</p>
+                  <div><span class="bandhouse-solution-map__dot bandhouse-solution-map__dot--today"></span>Today</div>
+                  <div><span class="bandhouse-solution-map__dot bandhouse-solution-map__dot--tomorrow"></span>Tomorrow</div>
+                  <div><span class="bandhouse-solution-map__dot bandhouse-solution-map__dot--week"></span>2-6 days</div>
+                  <div><span class="bandhouse-solution-map__dot bandhouse-solution-map__dot--next"></span>7+ days</div>
+                </div>
+                <div class="bandhouse-solution-map__tabbar" aria-hidden="true">
+                  <span>Feed</span><span class="is-active">Map</span><span>Post</span><span>Profile</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section pinhaus-benefits-bar reveal reveal-rich reveal-stagger reveal--eager"
+        data-theme="soft"
+        data-theme-section
+      >
+        <h3 class="case-h2 pinhaus-benefits-bar__label" id="bandhouse-solution-benefits-heading">
+          Benefits:
+        </h3>
+        <div class="pinhaus-benefits-bar__row">
+          <ul
+            class="pinhaus-benefits-bar__list"
+            aria-labelledby="bandhouse-solution-benefits-heading"
+          >
+            <li>
+              <span class="pinhaus-benefits-bar__arrow" aria-hidden="true">↑</span>
+              <span class="pinhaus-benefits-bar__text">Improved Organization</span>
+            </li>
+            <li>
+              <span class="pinhaus-benefits-bar__arrow" aria-hidden="true">↑</span>
+              <span class="pinhaus-benefits-bar__text">Higher Ticket Sales</span>
+            </li>
+            <li>
+              <span class="pinhaus-benefits-bar__arrow" aria-hidden="true">↑</span>
+              <span class="pinhaus-benefits-bar__text">Higher Turnout</span>
+            </li>
+            <li>
+              <span class="pinhaus-benefits-bar__arrow" aria-hidden="true">↓</span>
+              <span class="pinhaus-benefits-bar__text">Less Gatekeeping</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- In the app -->
+      <section
+        id="bandhouse-surface"
+        class="section bandhouse-app-surface reveal reveal--eager reveal-rich reveal-stagger"
+        data-theme="light"
+        data-theme-section
+      >
+        <div class="container container--case">
+          <header class="case-section-header">
+            <h2
+              class="case-h2 case-h2--center split-lines reveal-child"
+              id="bandhouse-surface-heading"
+            >
+              <span class="split-lines__line"
+                ><span class="split-lines__inner">The Bandhouse App</span></span
+              >
+            </h2>
+          </header>
+        </div>
+
+        <div class="bandhouse-app-strip">
+        <div class="container container--case">
+            <article class="bandhouse-app-strip__row reveal-child">
+              <div class="bandhouse-app-strip__copy">
+                <h3 class="bandhouse-app-strip__title split-lines">
+                <span class="split-lines__line"
+                    ><span class="split-lines__inner">Chronological feed</span></span
+                >
+            </h3>
+                <p class="bandhouse-app-strip__body">
+                  No need to dig to find a plan for the night. We offer it to you as the first
+                  thing. Don't know what to do? Open the app: the first thing is something you
+                  and your friends can actually go to.
+            </p>
+          </div>
+              <figure
+                class="bandhouse-app-strip__media bandhouse-app-media-slot"
+                aria-label="Chronological feed: image or video"
+              >
+                <video
+                  aria-label="BandHouse chronological feed showing local show flyers in a vertical list."
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  <source src="./assets/Chronological feed.mp4" type="video/mp4" />
+                </video>
+              </figure>
+            </article>
+
+            <article class="bandhouse-app-strip__row bandhouse-app-strip__row--flip reveal-child">
+              <div class="bandhouse-app-strip__copy">
+                <h3 class="bandhouse-app-strip__title split-lines">
+                  <span class="split-lines__line"
+                    ><span class="split-lines__inner">Map discovery</span></span
+                  >
+            </h3>
+                <p class="bandhouse-app-strip__body">
+                  Pins for venues and shows so distance and neighborhood stay visible. You are not
+                  stuck in a single list sorted by whoever paid for placement.
+            </p>
+          </div>
+              <figure
+                class="bandhouse-app-strip__media bandhouse-app-media-slot"
+                aria-label="Map discovery: image or video"
+              >
+                <video
+                  aria-label="BandHouse map discovery view with local show pins."
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  <source src="./assets/Map View.mp4" type="video/mp4" />
+                </video>
+              </figure>
+            </article>
+
+            <article class="bandhouse-app-strip__row reveal-child">
+              <div class="bandhouse-app-strip__copy">
+                <h3 class="bandhouse-app-strip__title split-lines">
+                  <span class="split-lines__line"
+                    ><span class="split-lines__inner">Flyer-first cards</span></span
+                  >
+            </h3>
+                <p class="bandhouse-app-strip__body">
+                  Flyers carry identity for local music. They stay primary in the layout so the app
+                  feels like the culture it is serving, not a generic events marketplace.
+            </p>
+          </div>
+              <figure
+                class="bandhouse-app-strip__media bandhouse-app-media-slot"
+                aria-label="Flyer-first cards: image or video"
+              >
+                <img
+                  src="./assets/Flyer First Cards.jpg"
+                  alt="BandHouse flyer-first cards in the feed."
+                  width="1080"
+                  height="2340"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </article>
+
+            <article class="bandhouse-app-strip__row bandhouse-app-strip__row--flip reveal-child">
+              <div class="bandhouse-app-strip__copy">
+                <h3 class="bandhouse-app-strip__title split-lines">
+                <span class="split-lines__line"
+                  ><span class="split-lines__inner">Event context</span></span
+                >
+                </h3>
+                <p class="bandhouse-app-strip__body">
+                  Lineup, time, and place stay in one clear view so you can decide fast if a night
+                  fits the vibe. Context is visible before you commit, not buried behind extra taps.
+                </p>
+              </div>
+              <figure
+                class="bandhouse-app-strip__media bandhouse-app-media-slot"
+                aria-label="Event context: image or video"
+              >
+                <img
+                  src="./assets/Event Context.jpg"
+                  alt="BandHouse event context view showing show details."
+                  width="1080"
+                  height="2340"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </article>
+
+            <article class="bandhouse-app-strip__row reveal-child">
+              <div class="bandhouse-app-strip__copy">
+                <h3 class="bandhouse-app-strip__title split-lines">
+                  <span class="split-lines__line"
+                    ><span class="split-lines__inner">Calendar view</span></span
+                  >
+                </h3>
+                <p class="bandhouse-app-strip__body">
+                  We even made a calendar view for those who really like to be organized. Scan the
+                  month, see what is landing on which night, and plan further out without losing the
+                  same show data as the feed.
+                </p>
+              </div>
+              <figure
+                class="bandhouse-app-strip__media bandhouse-app-media-slot"
+                aria-label="Calendar view: image or video"
+              >
+                <img
+                  src="./assets/Calander View.jpg"
+                  alt="BandHouse calendar view for planning upcoming shows."
+                  width="1080"
+                  height="2340"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </article>
+
+            <article class="bandhouse-app-strip__row bandhouse-app-strip__row--flip reveal-child">
+              <div class="bandhouse-app-strip__copy">
+                <h3 class="bandhouse-app-strip__title split-lines">
+                  <span class="split-lines__line"
+                    ><span class="split-lines__inner">Security</span></span
+                  >
+            </h3>
+                <p class="bandhouse-app-strip__body">
+                  School emails can sign up right away. Non-school emails must request access and
+                  are manually reviewed before entry. This keeps the show layer safer by staying
+                  mainly accessible to students and trusted people in the scene.
+                </p>
+              </div>
+              <figure
+                class="bandhouse-app-strip__media bandhouse-app-media-slot"
+                aria-label="Security onboarding: image or video"
+              >
+                <img
+                  src="./assets/Security.jpg"
+                  alt="BandHouse security screen for approved signups."
+                  width="1080"
+                  height="2340"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Design approach + outcome -->
+      <section
+        class="section case-study-band case-study-band--prose reveal reveal-rich reveal-stagger"
+        data-theme="light"
+        data-theme-section
+      >
+        <div class="pinhaus-design-approach-panel reveal-child">
+          <div class="pinhaus-design-approach-panel__black">
+            <div class="container container--narrow pinhaus-design-approach-panel__head">
+              <h2 id="bandhouse-design" class="case-h2 split-lines reveal-child">
+            <span class="split-lines__line"
+              ><span class="split-lines__inner">Design approach</span></span
+            >
+          </h2>
+              <div class="pinhaus-design-approach-panel__segments reveal-child" aria-label="Design principles">
+                <span>Organized</span>
+                <span>Informative</span>
+                <span>Clarity</span>
+                <span>SCENE-FOCUSED</span>
+              </div>
+            </div>
+          </div>
+          <div class="container container--narrow pinhaus-design-approach-panel__rationale-wrap">
+            <div class="pinhaus-design-approach-panel__rationale-row reveal-child">
+              <h3 class="pinhaus-design-approach-panel__rationale-label">Visual language</h3>
+              <p class="pinhaus-design-approach-panel__rationale">
+                The interface stays close to what you see on walls and in group chats: bold type,
+                flyer imagery up front, and enough restraint that the map and feed stay readable when
+                you are moving between venues at night.
+              </p>
+            </div>
+            <div class="pinhaus-design-approach-panel__rationale-row reveal-child">
+              <h3 class="pinhaus-design-approach-panel__rationale-label">Product goal</h3>
+              <p class="pinhaus-design-approach-panel__rationale">
+                I am optimizing for adoption in real scenes. The goal is to spread it to customers
+                first, then bands. From there, it is self-sustaining. Organizing this scene means
+                helping promote smaller events and giving people easier access to make connections.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="section-divider reveal" aria-hidden="true">
+          <span class="section-divider__line"></span>
+        </div>
+        <div class="container container--narrow pinhaus-design-outcome-wrap">
+          <div class="bandhouse-outcome-layout">
+            <div class="bandhouse-outcome-layout__copy">
+              <h2 id="bandhouse-outcome" class="case-h2 split-lines reveal-child">
+            <span class="split-lines__line"
+              ><span class="split-lines__inner">Outcome</span></span
+            >
+          </h2>
+              <p class="pinhaus-design-outcome-wrap__text reveal-child">
+                A working iOS app that turns fragmented local noise into a single map plus feed you
+                can actually plan from, built end to end as my product design and engineering thesis
+                for how scenes deserve to be organized.
+              </p>
+            </div>
+            <a
+              class="bandhouse-appstore-icon reveal-child"
+              href="https://apps.apple.com/ng/app/bandhouse-live/id6755076527"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open BandHouse on the App Store"
+            >
+              <img
+                src="./assets/bandhouse-logo.jpg"
+                alt="BandHouse app icon"
+                width="768"
+                height="768"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="bandhouse-appstore-icon__label">CLICK TO VIEW ON APP STORE!</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section case-next band-black-gloss reveal reveal-rich"
+        data-theme="light"
+        data-theme-section
+      >
+        <div class="container container--case">
+          <a
+            href="./pinhaus.html"
+            class="case-next__link"
+            aria-label="Next case study: PinHaus"
+          >
+            <span class="case-next__eyebrow label-caps">View the next case study</span>
+            <span class="case-next__row">
+              <span class="case-next__title display-title display-title--footer">PinHaus</span>
+              <span class="case-next__arrow" aria-hidden="true">→</span>
+            </span>
+            <span class="case-next__meta footer-deck">Fashion inspiration and commerce in one flow</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"
+      defer
+    ></script>
+    <script src="./script.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PinHaus Case Study - Owen Doherty</title>
+    <meta
+      name="description"
+      content="PinHaus case study by Owen Doherty: merging fashion inspiration and commerce."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-theme="light">
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="container nav-row nav-row--pinhaus-hiw">
+        <div class="nav-row__pill-stack">
+          <div class="nav-row__invert-shell">
+            <a
+              href="./index.html"
+              class="nav-back-btn"
+              aria-label="Back to home"
+              data-magnetic
+              ><span aria-hidden="true">←</span><span>Back</span></a
+            >
+            <nav class="site-nav">
+              <a
+                href="file:///Users/owendoherty/Documents/Doherty%20Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-magnetic
+                >Resume</a
+              >
+              <a href="./about.html" data-magnetic>About</a>
+            </nav>
+          </div>
+          <div class="nav-row__hiw-progress" aria-hidden="true">
+            <div class="nav-row__hiw-progress-fill"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="case-page case-page--editorial case-page--pinhaus">
+      <!-- 01 · Hero -->
+      <section
+        class="section case-hero-editorial reveal reveal-rich"
+        data-theme="light"
+        data-theme-section
+      >
+        <div class="case-hero-editorial__title-bleed">
+          <div class="case-hero-editorial__title-stack">
+            <h1 class="case-hero-editorial__word split-lines">
+              <span class="split-lines__line"
+                ><span class="split-lines__inner">PinHaus</span></span
+              >
+            </h1>
+            <div
+              class="case-hero-editorial__segments"
+              aria-label="PinHaus hero metadata"
+            >
+              <span>Fashion × commerce</span>
+              <span>Case study</span>
+              <span>2025</span>
+              <span>iOS / Swift / Firebase</span>
+            </div>
+          </div>
+        </div>
+        <div class="container container--case">
+          <div class="case-hero-editorial__statement case-hero-editorial__statement--split">
+            <p
+              class="case-hero-editorial__statement-text case-editorial-statement-text"
+            >
+              A product that combines style curation and purchasing, so users can move from
+              inspiration to checkout seamlessly.
+            </p>
+            <nav
+              class="case-hero-editorial__toc"
+              aria-label="Jump to a section in this case study"
+            >
+              <a href="#pinhaus-overview">Overview</a>
+              <a href="#pinhaus-solution">Solution</a>
+              <a href="#pinhaus-how-it-works">How it works</a>
+              <a href="#pinhaus-design">Design approach</a>
+              <a href="#pinhaus-outcome">Outcome</a>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <!-- Product -->
+      <section
+        id="pinhaus-product"
+        class="section reveal reveal-rich"
+        data-theme="soft"
+        data-theme-section
+      >
+        <div class="container container--case">
+          <figure
+            class="case-phone-mock case-asset"
+            data-cursor-parallax="22"
+            aria-label="PinHaus on iPhone: boards and marketplace flow"
+          >
+            <div class="case-phone-mock__stack">
+              <div class="case-phone-mock__bg" aria-hidden="true"></div>
+              <img
+                class="case-phone-mock__phones"
+                src="./Phone%20Mock%20up%20PinHaus.png"
+                alt="Three iPhone screens showing PinHaus boards, discovery, and marketplace purchase flow."
+                width="1600"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Context -->
+      <section
+        id="pinhaus-overview"
+        class="section case-study-band case-study-band--prose case-overview-split reveal reveal-rich reveal-stagger"
+        data-theme="light"
+        data-theme-section
+      >
+        <div class="container container--case case-overview-split__inner">
+          <h2
+            class="case-h2 split-lines reveal-child case-overview-split__title"
+            id="pinhaus-overview-heading"
+          >
+            <span class="split-lines__line"
+              ><span class="split-lines__inner">Overview</span></span
+            >
+          </h2>
+          <div class="case-overview-split__body">
+            <p
+              class="case-overview-split__lede case-editorial-statement-text reveal-child"
+            >
+              In early 2025, I was thinking about the difficulty, complexity, and
+              ambiguity that goes into achieving a style. Then I started to think
+              about it fundamentally and discovered
+              something: the process has two steps—finding your style, then finding
+              where to purchase that style.
+            </p>
+            <p
+              class="case-overview-split__footnote case-editorial-statement-text reveal-child"
+            >
+              However, there is no app to bridge this process. PinHaus is my project
+              that assists with curation and alleviates the pain of finding the right
+              clothing.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- The current style process -->
+      <section
+        id="pinhaus-style-process"
+        class="section case-evidence-yt case-style-process reveal reveal-rich reveal-stagger"
+        data-theme="soft"
+        data-theme-section
+      >
+        <div class="container container--case">
+          <h2 class="case-h2 case-style-process__title split-lines reveal-child">
+            <span class="split-lines__line"
+              ><span class="split-lines__inner">The current style process</span></span
+            >
+          </h2>
+
+          <div class="case-style-process__step reveal-child">
+              <h3 class="case-style-process__step-title">Curation</h3>
+              <div class="case-style-process__panel">
+                <div
+                  class="case-yt-triple"
+                  role="group"
+                  aria-label="YouTube search results on style and Pinterest curation"
+                >
+                  <figure class="case-yt-triple__cell">
+                    <span class="case-yt-thumb-num" aria-hidden="true">1</span>
+                    <div class="case-yt-thumb-frame">
+                      <img
+                        src="./YT%20Vid%20Pin%202.jpg"
+                        alt="YouTube thumbnail: how to start curating with Pinterest, by Jevon Henley, 259K views."
+                        width="640"
+                        height="360"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  </figure>
+                  <figure class="case-yt-triple__cell">
+                    <span class="case-yt-thumb-num" aria-hidden="true">2</span>
+                    <div class="case-yt-thumb-frame">
+                      <img
+                        src="./YT%20Vid%20Pin%203.jpg"
+                        alt="YouTube thumbnail: how to find your aesthetic as a guy, OnPointFresh, 253K views, Pinterest in chapters."
+                        width="640"
+                        height="360"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  </figure>
+                  <figure class="case-yt-triple__cell">
+                    <span class="case-yt-thumb-num" aria-hidden="true">3</span>
+                    <div class="case-yt-thumb-frame">
+                      <img
+                        src="./YT%20Vid%20Pin.jpg"
+                        alt="YouTube thumbnail: Find Your Fashion Style in 3 Steps, QOVES, Pinterestcore, 340K views."
+                        width="640"
+                        height="360"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  </figure>
+                </div>
+                <div class="case-yt-callout case-yt-callout--panel">
+                  <div class="case-yt-callout__body">
+                    <p class="case-editorial-statement-text">
+                      All the top videos about finding your style involve Pinterest, so we can
+                      safely say they control this sector. But what about purchasing?
+                    </p>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <div class="case-style-process__step reveal-child">
+            <h3 class="case-style-process__step-title">Purchasing</h3>
+            <div class="case-purchase-logos-strip reveal-child">
+              <div class="container container--case">
+                <ul
+                  class="case-purchase-logos"
+                  aria-label="Examples of resale and marketplace platforms"
+                >
+                  <li>
+                    <img
+                      src="./Ex%20Logo%201.jpg"
+                      alt="Vestiaire Collective"
+                      width="1014"
+                      height="212"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </li>
+                  <li>
+                    <img
+                      src="./Ex%20Logo%202.jpg"
+                      alt="Poshmark"
+                      width="1174"
+                      height="354"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </li>
+                  <li>
+                    <img
+                      src="./Ex%20Logo%203.jpg"
+                      alt="Depop"
+                      width="612"
+                      height="302"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </li>
+                  <li>
+                    <img
+                      src="./Ex%20Logo%204.jpg"
+                      alt="Etsy"
+                      width="672"
+                      height="296"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </li>
+                  <li>
+                    <img
+                      src="./Ex%20Logo%205.jpg"
+                      alt="eBay"
+                      width="982"
+                      height="160"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </li>
+                  <li>
+                    <img
+                      src="./Ex%20Logo%206.jpg"
+                      alt="The RealReal"
+                      width="1130"
+                      height="304"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </li>
+                  <li>
+                    <img
+                      src="./Ex%20Logo%207.jpg"
+                      alt="ThredUp"
+                      width="1082"
+                      height="280"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="case-style-process__panel case-style-process__panel--purchase">
+              <p class="case-editorial-statement-text case-purchase-editorial">
+                All these apps, and you still can&apos;t find what you saved on Pinterest.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider reveal" aria-hidden="true">
+        <span class="section-divider__line"></span>
+      </div>
+
+      <!-- Where it breaks (hub: split → fixes tried → fragmentation) -->
+      <section
+        id="pinhaus-where-it-breaks"
+        class="section case-study-band case-breaks-hub reveal reveal-rich reveal-stagger"
+        data-theme="light"
+        data-theme-section
+      >
+        <h2 class="case-h2 case-h2--center case-breaks-hub__title split-lines reveal-child">
+          <span class="split-lines__line"
+            ><span class="split-lines__inner">Where the problem lies</span></span
+          >
+        </h2>
+        <div class="container container--case">
+          <div class="case-problem-gap reveal-child">
+            <div class="case-problem-gap__bridge-row" aria-hidden="true">
+              <span class="case-problem-gap__bridge-line"></span>
+            </div>
+            <div class="case-problem-gap__stem-row" aria-hidden="true">
+              <span class="case-problem-gap__stem"></span>
+            </div>
+            <div class="case-problem-gap__row">
+              <div class="case-problem-gap__row-cell case-problem-gap__row-cell--left">
+                <span class="case-problem-gap__label case-problem-gap__label--left">Curation</span>
+                <span class="case-problem-gap__chevron-stack case-problem-gap__chevron-stack--left" aria-hidden="true">
+                  <svg class="case-problem-gap__chevron-icon" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2 L8 8 L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg class="case-problem-gap__chevron-icon" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2 L8 8 L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg class="case-problem-gap__chevron-icon" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2 L8 8 L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
+              <span class="case-problem-gap__here">???</span>
+              <div class="case-problem-gap__row-cell case-problem-gap__row-cell--right">
+                <span class="case-problem-gap__chevron-stack case-problem-gap__chevron-stack--right" aria-hidden="true">
+                  <svg class="case-problem-gap__chevron-icon" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2 L8 8 L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg class="case-problem-gap__chevron-icon" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2 L8 8 L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg class="case-problem-gap__chevron-icon" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2 L8 8 L2 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="case-problem-gap__label case-problem-gap__label--right">Purchasing</span>
+              </div>
+            </div>
+          </div>
+          <div class="case-problem-gap__note reveal-child">
+            <p class="case-problem-gap__note-line">
+              The process after curation is a mystery.
+            </p>
+            <p class="case-problem-gap__note-line">
+              You are left hoping the exact items you want are available for purchase across the many apps/websites.
+            </p>
+            <p class="case-problem-gap__note-line">
+              This is where confusion and friction becomes most prominant, because chances are you cannot find it.
+            </p>
+            <p class="case-problem-gap__note-line">
+              This is what causes people to skip curation and rely on purchasing websites to show them something.
+            </p>
+            <p class="case-problem-gap__note-line">
+              But without curation there is not style.
+            </p>
+            <p class="case-problem-gap__note-line">
+              It becomes a job of finding something you might wear rather than getting what you want to wear.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Solution -->
+      <section
+        class="section case-study-band case-study-band--prose reveal reveal-rich reveal-stagger reveal--eager"
+        data-theme="soft"
+        data-theme-section
+      >
+        <div class="container container--narrow">
+          <div class="case-solution-stack">
+            <div class="case-solution-stack__band">
+              <h2
+                id="pinhaus-solution"
+                class="case-h2 case-h2--spaced case-h2--center split-lines reveal-child"
+              >
+                <span class="split-lines__line"
+                  ><span class="split-lines__inner">Solution</span></span
+                >
+              </h2>
+              <p class="case-solution-equals reveal-child">
+                <span class="case-solution-equals__word case-solution-equals__word--left"
+                  >Curation</span
+                >
+                <span class="case-solution-equals__equals" aria-hidden="true">
+                  <span class="case-solution-equals__equals-line"></span>
+                  <span class="case-solution-equals__equals-line"></span>
+                </span>
+                <span class="case-solution-equals__word case-solution-equals__word--right"
+                  >Purchasing</span
+                >
+              </p>
+            </div>
+            <div class="case-solution-stack__prose">
+              <p class="case-problem-lies-voice case-solution-stack__main reveal-child">
+                PinHaus offers the ability to develop your style while searching for items.
+                By combining Pinterest mechanics with commerce-only inventory, we create a
+                new platform that offers curation and purchasing as one. This lets you go
+                from inspiration to organization to purchasing seamlessly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Benefits: full-width strip below Solution -->
+      <section
+        class="section pinhaus-benefits-bar reveal reveal-rich reveal-stagger reveal--eager"
+        data-theme="soft"
+        data-theme-section
+      >
+        <h3
+          class="case-h2 pinhaus-benefits-bar__label"
+          id="pinhaus-solution-benefits-heading"
+        >
+          Benefits
+        </h3>
+        <div class="pinhaus-benefits-bar__row">
+          <ul
+            class="pinhaus-benefits-bar__list"
+            aria-labelledby="pinhaus-solution-benefits-heading"
+          >
+            <li>
+              <span class="pinhaus-benefits-bar__arrow" aria-hidden="true">↑</span>
+              <span class="pinhaus-benefits-bar__text"
+                >Intrinsic motivation to purchase</span
+              >
+            </li>
+            <li>
+              <span class="pinhaus-benefits-bar__arrow" aria-hidden="true">↑</span>
+              <span class="pinhaus-benefits-bar__text">Micro trend sensitivity</span>
+            </li>
+            <li>
+              <span class="pinhaus-benefits-bar__arrow" aria-hidden="true">↑</span>
+              <span class="pinhaus-benefits-bar__text">Purchase rate</span>
+            </li>
+            <li>
+              <span class="pinhaus-benefits-bar__arrow" aria-hidden="true">↑</span>
+              <span class="pinhaus-benefits-bar__text">Engagement rate</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- How it works: headline inside sticky panel so it stays visible while scrubbing -->
+      <section
+        id="pinhaus-how-it-works"
+        class="section"
+        data-theme="soft"
+        data-theme-section
+      >
+        <div class="pinhaus-hiw-scroll-root" data-pinhaus-hiw>
+          <div class="pinhaus-hiw-deco" aria-hidden="true">
+            <span class="pinhaus-hiw-deco__tl-h"></span>
+            <span class="pinhaus-hiw-deco__tl-v"></span>
+            <span class="pinhaus-hiw-deco__corner pinhaus-hiw-deco__corner--br"></span>
+          </div>
+          <div class="pinhaus-hiw-sticky-panel">
+            <div class="pinhaus-hiw-inner">
+              <div class="reveal reveal-rich reveal-stagger pinhaus-hiw-head">
+                <h2
+                  class="case-h2 pinhaus-key-features__title reveal-child"
+                  aria-label="How it works"
+                >
+                  <span class="pinhaus-key-features__word pinhaus-key-features__word--how"
+                    >How</span
+                  >
+                  <span class="pinhaus-key-features__word pinhaus-key-features__word--it"
+                    >it</span
+                  >
+                  <span
+                    class="pinhaus-key-features__word pinhaus-key-features__word--works"
+                    >works</span
+                  >
+                </h2>
+              </div>
+              <nav class="pinhaus-hiw-nav" aria-label="How PinHaus works">
+                <ol class="pinhaus-hiw-list">
+                  <li class="pinhaus-hiw-item" data-hiw-step="0">
+                    <button type="button" class="pinhaus-hiw-btn">Explore</button>
+                  </li>
+                  <li class="pinhaus-hiw-item" data-hiw-step="1">
+                    <button type="button" class="pinhaus-hiw-btn">
+                      Create boards
+                    </button>
+                  </li>
+                  <li class="pinhaus-hiw-item" data-hiw-step="2">
+                    <button type="button" class="pinhaus-hiw-btn">
+                      Find similar items
+                    </button>
+                  </li>
+                  <li class="pinhaus-hiw-item" data-hiw-step="3">
+                    <button type="button" class="pinhaus-hiw-btn">Repeat</button>
+                  </li>
+                  <li class="pinhaus-hiw-item" data-hiw-step="4">
+                    <button type="button" class="pinhaus-hiw-btn">
+                      Discover your style
+                    </button>
+                  </li>
+                </ol>
+              </nav>
+              <div class="pinhaus-hiw-stage">
+                <div class="pinhaus-hiw-photo-stack">
+                  <div class="pinhaus-hiw-line" aria-hidden="true"></div>
+                  <figure class="pinhaus-hiw-figure">
+                    <div class="pinhaus-hiw-visual" data-hiw-visual>
+                      <img
+                        class="pinhaus-hiw-layer is-visible"
+                        data-hiw-layer="0"
+                        src="./assets/pinhaus/how-it-works/hiw-00.jpg"
+                        alt=""
+                        width="900"
+                        height="1600"
+                        loading="eager"
+                        fetchpriority="high"
+                        decoding="async"
+                      />
+                      <img
+                        class="pinhaus-hiw-layer"
+                        data-hiw-layer="1"
+                        src="./assets/pinhaus/how-it-works/hiw-00.jpg"
+                        alt=""
+                        width="900"
+                        height="1600"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <figcaption class="visually-hidden" data-hiw-caption aria-live="polite">
+                      PinHaus screen: explore a product listing.
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+              <div
+                class="pinhaus-hiw-mobile-dots"
+                data-hiw-mobile-dots
+                aria-hidden="true"
+              ></div>
+              <p
+                class="pinhaus-hiw-mobile-caption"
+                data-hiw-mobile-label
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <span class="pinhaus-hiw-mobile-caption__text"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Design + outcome -->
+      <section
+        class="section case-study-band case-study-band--prose reveal reveal-rich reveal-stagger"
+        data-theme="light"
+        data-theme-section
+      >
+        <div class="pinhaus-design-approach-panel reveal-child">
+          <div class="pinhaus-design-approach-panel__black">
+            <div class="container container--narrow pinhaus-design-approach-panel__head">
+              <h2 id="pinhaus-design" class="case-h2 split-lines reveal-child">
+                <span class="split-lines__line"
+                  ><span class="split-lines__inner">Design approach</span></span
+                >
+              </h2>
+              <div class="pinhaus-design-approach-panel__segments reveal-child" aria-label="Design approach principles">
+                <span>Item focused UI</span>
+                <span>Fashion archive</span>
+                <span>Pinterest familiarity</span>
+                <span>Ease of use</span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="pinhaus-design-carousel reveal reveal-rich"
+            data-pinhaus-design-carousel
+            aria-roledescription="carousel"
+            aria-label="Design reference images"
+          >
+            <div class="pinhaus-design-carousel__viewport">
+              <ul class="pinhaus-design-carousel__track">
+                <li class="pinhaus-design-carousel__slide is-active">
+                  <img
+                    src="./assets/pinhaus/design/backstage-bg.jpg"
+                    alt="Backstage-style mood and texture."
+                    width="1600"
+                    height="900"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </li>
+                <li class="pinhaus-design-carousel__slide">
+                  <img
+                    src="./assets/pinhaus/design/appstore-logo.jpg"
+                    alt="PinHaus mark on App Store presentation."
+                    width="1200"
+                    height="1200"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </li>
+                <li class="pinhaus-design-carousel__slide">
+                  <img
+                    src="./assets/pinhaus/design/pinhaus-intro.jpg"
+                    alt="PinHaus introduction screen in the app."
+                    width="1200"
+                    height="2000"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </li>
+                <li class="pinhaus-design-carousel__slide">
+                  <img
+                    src="./assets/pinhaus/design/success-background.jpg"
+                    alt="Success state background treatment."
+                    width="1600"
+                    height="900"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </li>
+                <li class="pinhaus-design-carousel__slide">
+                  <img
+                    src="./assets/pinhaus/design/web-caro-example.jpg"
+                    alt="Web carousel layout reference."
+                    width="1600"
+                    height="900"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </li>
+              </ul>
+              <div class="pinhaus-design-carousel__chrome">
+                <button
+                  type="button"
+                  class="pinhaus-design-carousel__arrow pinhaus-design-carousel__arrow--prev"
+                  data-design-carousel-prev
+                  aria-label="Previous image"
+                >
+                  <span class="pinhaus-design-carousel__nav-label">Previous</span>
+                </button>
+                <button
+                  type="button"
+                  class="pinhaus-design-carousel__arrow pinhaus-design-carousel__arrow--next"
+                  data-design-carousel-next
+                  aria-label="Next image"
+                >
+                  <span class="pinhaus-design-carousel__nav-label">Next</span>
+                </button>
+              </div>
+            </div>
+            <div class="pinhaus-design-carousel__dots" data-design-carousel-dots aria-label="Slides"></div>
+          </div>
+          <div class="container container--narrow pinhaus-design-approach-panel__rationale-wrap">
+            <div class="pinhaus-design-approach-panel__rationale-row reveal-child">
+              <h3 class="pinhaus-design-approach-panel__rationale-label">BRAND IDENTITY</h3>
+              <p class="pinhaus-design-approach-panel__rationale">
+                For the outward appearance, I focused on an Atelier / New York fashion aesthetic.
+                The target audience during the growth and early stages of this product is people who
+                want to stay ahead of the curve in both fashion and technology. They’re drawn to
+                things that feel a bit mysterious, slightly underground, and well-curated.
+              </p>
+            </div>
+            <div class="pinhaus-design-approach-panel__rationale-row reveal-child">
+              <h3 class="pinhaus-design-approach-panel__rationale-label">APP DESIGN</h3>
+              <p class="pinhaus-design-approach-panel__rationale">
+                For the app itself, the design is straightforward and content-focused. The goal is
+                to keep everything clean and minimal, with simple menus and as little interruption
+                to the browsing experience as possible.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="container container--narrow pinhaus-design-outcome-wrap">
+          <h2 id="pinhaus-outcome" class="case-h2 split-lines reveal-child">
+            <span class="split-lines__line"
+              ><span class="split-lines__inner">Outcome</span></span
+            >
+          </h2>
+          <p class="pinhaus-design-outcome-wrap__text reveal-child">
+            A fully functional iOS app that combines inspiration and purchasing.
+          </p>
+          <figure class="pinhaus-design-outcome-wrap__icon reveal-child">
+            <img
+              src="/Users/owendoherty/.cursor/projects/Users-owendoherty-Documents-Product-Design-Port/assets/appstore-logo-0e52a028-1a79-4352-ac98-5604561cf8a9.png"
+              alt="PinHaus app icon"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section
+        class="section case-next band-black-gloss reveal reveal-rich"
+        data-theme="light"
+        data-theme-section
+      >
+        <div class="container container--case">
+          <a
+            href="./bandhouse.html"
+            class="case-next__link"
+            aria-label="Next case study: BandHouse"
+          >
+            <span class="case-next__eyebrow label-caps">View the next case study</span>
+            <span class="case-next__row">
+              <span class="case-next__title display-title display-title--footer">BandHouse</span>
+              <span class="case-next__arrow" aria-hidden="true">→</span>
+            </span>
+            <span class="case-next__meta footer-deck">Local music discovery on a map and feed</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"
+      defer
+    ></script>
+    <script src="./script.js" defer></script>
+  </body>
+</html>

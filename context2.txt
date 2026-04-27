@@ -1,0 +1,89 @@
+Agent Handoff + Operational Notes
+
+Purpose of this file:
+- Provide a fast boot-up guide for any new agent entering this project.
+- Track what has been done, what is next, and how to maintain consistency.
+
+Project Summary:
+- Building Owen Doherty's product design portfolio website.
+- Visual and motion direction should closely mirror user-provided inspiration references.
+- Owen will replace placeholder text/content with his own final copy.
+
+Canonical Direction Source:
+- See `context.txt` for full brand, design, interaction, and copy guidance.
+- **Copy:** No em dash (—) in site-facing HTML text; see `context.txt` Tone + Copy Direction.
+- If conflicts appear, `context.txt` is the priority source.
+
+Reference Assets To Mirror:
+- /Users/owendoherty/Downloads/Home page inspo_files
+- /Users/owendoherty/Downloads/Home page inspo.htm
+- /Users/owendoherty/Downloads/web page of product_files
+- /Users/owendoherty/Downloads/web page of product.htm
+- Motion/composition reference notes: `contextexampleweb.txt` (Design By Brandin patterns) — **not** its orange palette; Owen = neutral white/black/off-white + blur.
+
+Execution Priorities (for future agents):
+1) Establish hierarchy with empty space first (generous void, rhythm, restraint) — then align to references.
+2) Match motion behavior and timing second.
+3) Match visual density, typography, and brutal/abstract details third — never at the cost of space.
+4) Keep copy placeholders editable and obvious for Owen.
+5) Preserve clean architecture and reusable components.
+
+Non-Negotiables:
+- Minimal but expressive.
+- Empty space is central to hierarchy — prefer it almost over everything; it signals restraint, professionalism, and that every detail matters.
+- Strong type hierarchy — brutal/abstract lean, big bold main titles, numeric index system (large semi-blur or small), optional all-caps uniform bands, corner meta/frame details.
+- Spacing system must be consistent and generous; no cramped layouts.
+- Motion: scroll-rich (multiple animated properties, stagger), first-view text slide + blur resolving + fade; still premium, not cheap flashy.
+- Avoid generic startup aesthetics.
+- Build for real product usability; content stays product-design + credible UI/UX.
+- Copy about Owen: humble, accurate, not overconfident.
+- Do not change the home page hero unless Owen asks (see `context.txt`).
+- Color: white, black, greyish off-white, blur layers — no orange; avoid saturated accents by default. Black-on-black only for large readable surfaces with matte vs gloss separation when it truly helps.
+
+Suggested Build Workflow:
+1) Parse reference pages and map sections (nav, hero, work showcase, about, footer, etc).
+2) Build section scaffolding with reusable layout primitives.
+3) Implement visual styling tokens (spacing, radii, shadows, typography scale).
+4) Add interaction states and transitions globally, then tune per component.
+5) Add responsive behavior and verify rhythm on mobile/tablet/desktop.
+6) Final pass on polish (micro-interactions, spacing consistency, contrast/readability).
+
+Suggested File Organization (adapt as needed):
+- `src/components/` for reusable UI blocks
+- `src/sections/` for page sections
+- `src/styles/` or equivalent for global tokens/theme
+- `src/data/` or inline config for editable content placeholders
+
+Content Placeholder Guidance:
+- Keep text blocks clearly marked for Owen to edit.
+- Prefer centralized content objects for easy swapping.
+- Do not hard-code deeply nested strings when avoidable.
+
+Quality Bar:
+- Feels intentional, calm, and premium.
+- No visual clutter.
+- Smooth interaction timing (roughly 200ms-400ms).
+- Consistent spacing and alignment across all sections.
+- Production-ready, readable code.
+
+Progress Log:
+- [Done] Created `context.txt` with full direction and constraints.
+- [Done] Created `context2.txt` as handoff + operations guide.
+- [Done] Expanded `context.txt` with typography (brutal/abstract, numbers, corners), scroll motion (slide/blur/fade), interactive density, humble tone, product-design-first scope, UI/UX role alignment, locked home hero.
+- [Done] Documented empty space / negative space as primary hierarchy — restraint, professionalism, detail-minded composition.
+- [Done] Palette locked to neutral + blur; optional matte/gloss black-on-black for large elements only; `contextexampleweb.txt` for motion reference without Brandin orange.
+- [Done] `data-theme` / `data-theme-section` canvas crossfade (light · soft · mist), `[data-magnetic]` hovers.
+- [Removed 2026-03-24] Home sticky horizontal scrub — traded for straight vertical scroll (faster intake, closer to reference home rhythm).
+- [2026-03-24] Home: sticky *chapter* numerals (`data-sticky-chapter` + left rail, `position: sticky` within each section) + stronger hovers on projects, capability rows, chips.
+- [Next] Apply new motion/type/corner direction to non-hero sections without touching home hero.
+- [Next] Build initial site structure based on provided inspiration files (where not superseded by newer context).
+- [Next] Insert editable placeholder content for Owen.
+
+Handoff Checklist for Next Agent:
+- Read `context.txt` completely before editing code.
+- Preserve style and interaction intent.
+- Add concise notes to this file after major changes:
+  - what changed
+  - why it changed
+  - what remains
+- Keep decisions reversible and componentized.

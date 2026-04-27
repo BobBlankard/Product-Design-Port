@@ -1,0 +1,434 @@
+================================================================================
+CASE STUDY CONTEXT — replicate “PinHaus-quality” editorial case pages
+================================================================================
+Purpose
+-------
+This file is for a future agent (or you) to upgrade another case study (e.g.
+BandHouse) to match the visual polish, motion language, spacing rhythm, and
+editorial structure of the PinHaus case study in this repo.
+
+Primary references in this codebase
+--------------------------------------
+- HTML: pinhaus.html (gold standard for structure + section choreography)
+- CSS: styles.css (global tokens + editorial system + PinHaus-specific blocks)
+- JS: script.js (Lenis, scroll theme, reveals, split-lines, PinHaus-only modules)
+- Compare: bandhouse.html (older editorial shell; use PinHaus as the target)
+
+High-level product / design philosophy (as implemented)
+-------------------------------------------------------
+- “Editorial case study” = magazine-like pacing: mega type, narrow prose bands,
+  full-bleed moments, restrained color (mostly monochrome), glass nav, subtle
+  grain, purposeful motion (not gratuitous).
+- Primary UI chrome is black/white/gray; avoid loud accent washes on case pages.
+- Motion should feel premium: long-ish eased transitions, staggered reveals,
+  split-line typography reveals, smooth scroll (Lenis) when enabled.
+
+================================================================================
+1) INFORMATION ARCHITECTURE (PinHaus section order)
+================================================================================
+Typical PinHaus narrative spine (use the same chapter spine for other cases):
+1. Hero (mega title + metadata row + lede + optional in-page TOC)
+2. Product / key visual (often phone mock with parallax)
+3. Overview / problem framing (editorial split layouts, pull quotes, etc.)
+4. Solution (large typographic systems, stacked bands)
+5. How it works (scroll-scrubbed story + step rail — PinHaus-specific)
+6. Design approach (full-bleed black band + carousel + rationale grid)
+7. Outcome (centered typographic close + optional icon)
+8. Case next (cross-link)
+
+Anchor IDs
+----------
+- PinHaus uses predictable section IDs for the hero TOC, e.g. #pinhaus-overview.
+- For a new case, keep IDs namespaced (#bandhouse-overview, etc.) and update
+  hero TOC hrefs accordingly.
+
+================================================================================
+2) GLOBAL DESIGN TOKENS (styles.css :root + html data-theme)
+================================================================================
+Color system (case pages lean on these)
+----------------------------------------
+- --bg / page field: #ffffff (pure white field; no orange/purple wash)
+- --text: #0c0c0c
+- --muted: #5a5a5e (body copy on white)
+- --line: rgba(12,12,12,0.1)
+- --accent / --accent-hover: black-first UI
+- Page “canvas” shifts subtly with html[data-theme="light|soft|mist"] via
+  --canvas (background transitions ~0.78s on html)
+
+Typography stack
+----------------
+- Body UI / longform: Inter (400–800 loaded on case pages)
+- Display / headlines / editorial mega type: Space Grotesk via --font-display
+  ("Space Grotesk", Inter, system-ui, sans-serif)
+
+Spacing / radii / easing
+------------------------
+- Global space token: --space: clamp(16px, 2vw, 24px)
+- Radii: --radius-lg 16px, --radius-md 12px
+- Primary easing curve: --ease: cubic-bezier(0.22, 1, 0.36, 1)
+
+Containers (baseline widths)
+-----------------------------
+- Default .container: width min(--container=1180px, calc(100% - 40px))
+- Editorial pages widen containers at >=721px:
+  main.case-page--editorial .container--case|wide|narrow become width:100% with
+  horizontal padding clamp(16px, 2vw, 28px).
+
+================================================================================
+3) PAGE-LEVEL SHELL (every case study HTML page)
+================================================================================
+Head
+----
+- Include Google fonts link matching PinHaus:
+  Inter 400–800 + Space Grotesk 400–700
+- Link styles.css
+
+Body / chrome
+-------------
+- body data-theme="light" (initial)
+- Optional: <div class="scroll-progress"> (global top progress; editorial nav
+  may disable it on PinHaus when HIW exists)
+- <div class="grain-overlay"> subtle film grain (fixed, pointer-events none)
+- <header class="site-header"> with floating “pill” nav (.container.nav-row)
+
+Main landmark
+-------------
+- <main class="case-page case-page--editorial case-page--<slug>">
+  The chained classes matter: editorial spacing + page-specific overrides.
+
+================================================================================
+4) THEME SYSTEM (section-driven canvas + text contrast)
+================================================================================
+How it works (implemented in script.js: updateScrollTheme)
+----------------------------------------------------------
+- Any section that should shift the ambient theme includes:
+  data-theme-section
+  data-theme="light|soft|mist" (choose per section)
+
+Behavior
+--------
+- On scroll, the “best” intersecting section near a focal point (~38% of
+  viewport height) wins.
+- Winning section sets:
+  document.body.dataset.theme AND document.documentElement.dataset.theme
+- html background uses --canvas mapping for soft/mist/light.
+
+Authoring guidance
+------------------
+- Use light for crisp hero moments; soft/mist for long reading bands to reduce
+  harsh white fatigue.
+- Keep transitions smooth; don’t flip themes every few pixels — sections should
+  be tall enough to be stable.
+
+================================================================================
+5) NAVIGATION SYSTEM (editorial floating pill)
+================================================================================
+Base structure (bandhouse.html style)
+---------------------------------------
+<header class="site-header">
+  <div class="container nav-row"> ... back + links ... </div>
+</header>
+
+PinHaus enhancement (pinhaus.html + styles.css)
+-----------------------------------------------
+- Adds nav-row--pinhaus-hiw + pill-stack + invert-shell + HIW progress overlay.
+- Progress uses CSS var on documentElement:
+  --pinhaus-hiw-header-progress (0..1), eased in JS while in/near HIW.
+
+Editorial header width (desktop)
+--------------------------------
+- body:has(main.case-page--editorial) .site-header .container.nav-row stretches
+  full width with clamp padding (matches case containers).
+
+Motion / interaction
+--------------------
+- Magnetic hovers on fine pointers: data-magnetic on nav links (script.js)
+- Header condenses after small scroll threshold (updateHeaderState)
+
+================================================================================
+6) HERO: EDITORIAL MEGA TITLE + METADATA + LEDE (+ optional TOC)
+================================================================================
+Markup pattern (PinHaus)
+-----------------------
+<section class="section case-hero-editorial reveal reveal-rich"
+         data-theme="light" data-theme-section>
+  <div class="case-hero-editorial__title-bleed"> ... mega title ... </div>
+  <div class="container container--case">
+    <div class="case-hero-editorial__statement--split"> ... </div>
+  </div>
+</section>
+
+Typography rules (CSS)
+-----------------------
+- Mega title uses .case-hero-editorial__word with split-lines:
+  - font-family: var(--font-display)
+  - uppercase, tight letter-spacing, very large clamp() sizing
+  - Title stack is shrink-wrapped inline-grid; breaks out to 100vw bleed
+- Metadata row .case-hero-editorial__segments:
+  - 4-column grid on desktop; 2 columns <=820px on PinHaus design panel segments
+  - uppercase, wide tracking (~0.12em), Space Grotesk semibold feel
+
+PinHaus hero split (unique vs BandHouse)
+----------------------------------------
+- .case-hero-editorial__statement--split: 2-column grid, align-items:end
+- Left: lede uses .case-editorial-statement-text (UPPERCASE, display font)
+- Right: .case-hero-editorial__toc vertical list with decorative guide lines
+  whose lengths are set in JS (initCaseHeroTocGuideLines) using CSS variables
+  --case-toc-line-w per link.
+
+BandHouse upgrade checklist
+---------------------------
+- Adopt PinHaus hero split + TOC if you want parity.
+- If you keep a single-column hero statement, still use editorial statement
+  sizing for consistency (see .case-hero-editorial__statement-text defaults).
+
+================================================================================
+7) “REVEAL” MOTION LANGUAGE (scroll-driven entry)
+================================================================================
+Classes
+-------
+- .reveal / .reveal-rich on sections or blocks
+- .reveal-stagger + .reveal-child on grouped sequences
+
+Mechanism (script.js + styles.css)
+----------------------------------
+- IntersectionObserver adds .is-inview once (threshold ~0.2, rootMargin trims)
+- .reveal starts opacity 0 + translateY + blur (rich blur stronger)
+- transition ~700ms with --ease
+- prefers-reduced-motion collapses transitions to effectively instant and
+  removes blur filters
+
+Authoring guidance
+-------------------
+- Put reveal on the section wrapper for big moments.
+- Put reveal-stagger on a parent and reveal-child on each line/card for tasteful
+  sequencing (don’t exceed ~10 children without custom delays).
+
+================================================================================
+8) SPLIT-LINES TYPOGRAPHY REVEALS (headlines)
+================================================================================
+Markup pattern
+--------------
+<h2 class="case-h2 split-lines reveal-child">
+  <span class="split-lines__line"><span class="split-lines__inner">WORD</span></span>
+</h2>
+
+Mechanism
+---------
+- script.js adds html class split-lines-enhanced when motion is OK
+- IntersectionObserver adds .is-inview to .split-lines targets
+- CSS animates each .split-lines__inner with staggered delays
+
+PinHaus-specific tuning
+-----------------------
+- Many PinHaus chapter headings override .case-h2 defaults with larger clamps,
+  uppercase, tighter leading, sometimes full-bleed width tricks.
+
+================================================================================
+9) SMOOTH SCROLL + SCROLL-DRIVEN UI (Lenis)
+================================================================================
+Lenis (script.js)
+-----------------
+- If Lenis is available and user does not prefer reduced motion:
+  - html gets class "lenis"
+  - lenis.on("scroll", onScroll) drives scroll listeners
+- getScrollY() returns lenis.scroll when active
+
+Case study TOC anchors
+----------------------
+- initCaseStudyTocAnchors(): intercepts clicks in .case-hero-editorial__toc and
+  calls lenis.scrollTo(target) (native hash scroll is unreliable under Lenis)
+
+Scroll progress bar
+-------------------
+- .scroll-progress fixed top; updateScrollProgress scalesX with document scroll
+- On PinHaus, may be suppressed to 0 when HIW exists (nav becomes progress)
+
+================================================================================
+10) PARALLAX + MICRO-INTERACTIONS
+================================================================================
+Cursor parallax on case hero phones
+-------------------------------------
+- figure.case-phone-mock[data-cursor-parallax="22"]
+- initCaseCursorParallax(): desktop + fine pointer only; disabled <=720px
+
+Magnetic buttons
+----------------
+- data-magnetic on small clickable text controls in nav
+- Uses transform on hover; avoid putting CSS transform on same elements that
+  need separate transforms for layout nudges (use margins instead).
+
+================================================================================
+11) PINHAUS “HOW IT WORKS” (scroll-scrubbed narrative — complex module)
+================================================================================
+HTML anchors
+------------
+- Root: [data-pinhaus-hiw] on .pinhaus-hiw-scroll-root
+- Steps: .pinhaus-hiw-nav buttons with data-hiw-step
+- Visual stack: layered <img.pinhaus-hiw-layer> swapped by JS
+
+JS modules (script.js)
+----------------------
+- pinhausHiwGetScrollProgress(root): maps scroll position to 0..1 with a shaped
+  response curve (sensitivity tuned over time)
+- updatePinhausHowItWorks(): picks “flat” frame index + updates active step UI
+- initPinhausHowItWorks(): builds per-step dot rows, binds click-to-scroll
+- Mobile caption/dot systems exist (max-width 720 rules in CSS)
+
+CSS motifs
+----------
+- Full-bleed scroll root (100vw + negative margins) for cinematic screenshots
+- Sticky panel + 2-column desktop inner grid (nav rail vs stage)
+- Decorative line connector elements (absolute positioned)
+
+Replicating for another case study
+-----------------------------------
+- Do NOT copy blindly: this module is PinHaus-branded and tuned to specific
+  screenshot count and step mapping.
+- If BandHouse needs a scrub chapter, create new namespaced classes and new
+  constants arrays (frame URLs, step ranges) rather than overloading pinhaus-*.
+
+================================================================================
+12) PINHAUS “DESIGN APPROACH” PANEL (black band + carousel + rationale)
+================================================================================
+Structure (pinhaus.html + styles.css)
+--------------------------------------
+- Full-bleed panel wrapper: .pinhaus-design-approach-panel
+- Top black band: .pinhaus-design-approach-panel__black
+  - mix-blend-mode: difference on head wrapper for inverted typography moment
+- Principles row: .pinhaus-design-approach-panel__segments (4-up grid)
+- Carousel: .pinhaus-design-carousel (+ track/slide/chrome/arrows/dots)
+- Writing: rationale uses a 2-column label + paragraph grid on desktop
+
+JS
+--
+- initPinhausDesignCarousel(): prev/next, dots, keyboard support, transforms
+
+================================================================================
+13) OUTCOME CLOSE (PinHaus pattern)
+================================================================================
+Current PinHaus outcome block uses:
+- .pinhaus-design-outcome-wrap as a flex column with align-items:center
+- Large split-lines heading #pinhaus-outcome
+- Uppercased outcome sentence + centered “app icon” figure with rounded rect
+  styling (icon-like corner radius + shadow)
+
+================================================================================
+14) EDITORIAL PROSE RHYTHM (case-study-band system)
+================================================================================
+Common classes
+--------------
+- section.case-study-band.case-study-band--prose
+- inner containers: .container.container--narrow
+- headings: .case-h2 (often split-lines + reveal-child)
+- body paragraphs: muted color, ~1.05rem, line-height ~1.78
+
+Spacing heuristics (from CSS patterns)
+---------------------------------------
+- Section padding often uses clamp(48px, 8vw, 112px) on editorial sections
+  (see .case-page--editorial .section defaults nearby in styles.css)
+- Narrow prose prefers comfortable line length: max-width ~52–72ch depending
+  on block type
+- Use consistent “stack gaps” via grid/flex gap rather than ad-hoc margins
+
+================================================================================
+15) ACCESSIBILITY + PERFORMANCE CHECKLIST
+================================================================================
+- Always provide meaningful alt text for informative images; decorative-only
+  elements should be aria-hidden="true".
+- Buttons must be <button type="button"> for non-navigation controls.
+- Respect prefers-reduced-motion: do not rely on blur-only affordances; ensure
+  content is readable without motion.
+- Use loading="lazy" decoding="async" on large images below the fold.
+- Avoid introducing horizontal scroll; html overflow-x is hidden for a reason.
+
+================================================================================
+16) ENGINEERING / WORKFLOW PREFERENCES (from Owen’s Cursor rules)
+================================================================================
+Inspect-canvas workflow (.cursorrules)
+--------------------------------------
+When the user says “update this element / fix this UI”:
+1) Read .inspect-canvas.json at project root
+2) Use selector + computed styles + instruction
+3) Find the real source file and edit there (not only in devtools)
+
+Communication + writing style preferences ( distilled )
+--------------------------------------------------------
+- Write like a strong technical blog post: complete sentences, clear structure,
+  minimal fluff, no engagement bait closers.
+- Prefer precise language over jargon; explain what changed and why plainly.
+- Use markdown links with full URLs when referencing web content.
+- Code citations in chat should use Cursor’s required fence format when citing
+  existing code (```start:end:path with fence on its own line).
+- In fenced code meant for copy/paste, write full commands (no ellipses).
+- Avoid “§” in user-facing text.
+- For UI work: match existing spacing/typography patterns; polish matters.
+
+Coding discipline preferences
+-----------------------------
+- Keep diffs focused: no drive-by refactors unrelated to the request.
+- Match local conventions (naming, formatting, comment density).
+- Prefer reusing existing abstractions (editorial classes, reveal patterns).
+
+================================================================================
+17) BANDHOUSE → PINHAUS PARITY: practical rollout plan for an agent
+================================================================================
+Phase A — align page shell
+--------------------------
+1) Ensure bandhouse.html uses the same head font links + styles.css path.
+2) Ensure main has: case-page case-page--editorial case-page--bandhouse
+3) Match header/nav editorial width behavior (PinHaus uses extra HIW classes;
+   BandHouse can remain standard nav-row unless you add a BandHouse-only
+   enhancement).
+
+Phase B — hero parity
+---------------------
+1) Convert hero statement to split grid + TOC if desired:
+   - copy PinHaus markup pattern for statement--split + toc
+2) initCaseHeroTocGuideLines (script.js) runs for any main.case-page--editorial hero with
+   .case-hero-editorial__statement--split + .case-hero-editorial__toc (PinHaus + BandHouse).
+
+Phase C — motion parity
+-----------------------
+1) Add reveal / reveal-rich / reveal-stagger consistently to major sections.
+2) Ensure headings that should “feel PinHaus” use split-lines where appropriate.
+
+Phase D — chapter systems parity
+---------------------------------
+1) Identify BandHouse sections that should become full-bleed “poster” systems
+   similar to PinHaus “Where it breaks” / Design approach.
+2) Prefer creating new namespaced CSS blocks:
+   .case-page--bandhouse .bandhouse-<module> { ... }
+   rather than mixing unrelated case rules.
+
+Phase E — JS parity
+-------------------
+1) initCaseStudyTocAnchors already works for any .case-hero-editorial__toc
+2) initEditorialCaseSolutionBandWidth measures any main.case-page--editorial .case-solution-stack
+3) If adding carousels/scrubbers, follow initPinhausDesignCarousel patterns:
+   accessible buttons, reduced motion handling, resize listeners.
+
+================================================================================
+18) QUICK “COPY PASTE” CLASS CHEAT SHEET
+================================================================================
+Layout containers
+-----------------
+- .container.container--case      (primary editorial width)
+- .container.container--narrow   (prose width)
+- .section                       (vertical chapter rhythm)
+
+Motion primitives
+-----------------
+- .reveal .reveal-rich
+- .reveal-stagger > .reveal-child
+- .split-lines > .split-lines__line > .split-lines__inner
+
+Typographic roles
+-----------------
+- Mega hero word: .case-hero-editorial__word.split-lines
+- Chapter heading: .case-h2.split-lines
+- Uppercase editorial voice: .case-editorial-statement-text (PinHaus scoped)
+
+================================================================================
+END
+================================================================================

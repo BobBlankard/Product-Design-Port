@@ -1,0 +1,182 @@
+Project Context: Owen Doherty Portfolio Website
+
+Owner:
+- Owen Doherty
+- Product designer + full-stack developer
+- SDSU graduate (Business Entrepreneurship + Art minor)
+
+Primary Goal:
+- Build a product design portfolio showcase website that presents Owen as:
+  - Product Designer (UI/UX, consumer apps)
+  - Frontend/UI-focused engineer
+  - Creative technologist
+- Communicate that Owen builds real products end-to-end, with strong taste and systems thinking.
+
+Career + Audience (for copy and structure):
+- Primary hiring goal: product design roles (this site is a product design portfolio first).
+- Secondary interest: UI/UX roles — treat UI craft, flows, and research literacy as visible strengths.
+- Everything on the site should clearly support product design (process, outcomes, UI systems, and how work maps to users and product goals). Avoid filler that does not connect to product design.
+
+UI/UX domain grounding (for agents — keep work credible to hiring managers):
+- UX: problem framing, user needs, journeys, information architecture, usability, accessibility, validation (research/testing), metrics that matter to the product.
+- UI: visual hierarchy, typography and layout systems, components and states, consistency, interaction feedback, responsive behavior.
+- Product design: connects UX + UI + business constraints — prioritization, collaboration with engineering, shipping and iteration.
+- Prefer concrete, accurate language over jargon; when naming methods, use them correctly.
+
+Reference Implementation Direction:
+- User provided reference site files for layout/animation/style parity:
+  - /Users/owendoherty/Downloads/Home page inspo_files
+  - /Users/owendoherty/Downloads/Home page inspo.htm
+  - /Users/owendoherty/Downloads/web page of product_files
+  - /Users/owendoherty/Downloads/web page of product.htm
+- Intention: closely replicate structure, rhythm, and motion language.
+- Content/text will be swapped by Owen with his own final copy.
+
+About Owen (Core Identity):
+- Operates at the intersection of product design, engineering, and visual art.
+- Not a traditional designer; builds and ships complete products.
+- Experience:
+  - iOS apps (Swift + Firebase)
+  - Full-stack web projects (React, Next.js, Node)
+  - 10k+ organic art audience (xtc.ngl)
+  - Artistic + functional digital experiences
+
+Featured Projects:
+1) PinHaus
+- Fashion discovery + resale app
+- Pinterest-style boards + Depop-style commerce
+
+2) BandHouse
+- Live music discovery app
+- Map-based navigation + chronological feeds
+
+Design Philosophy:
+- Minimal but expressive (never bland, never overdesigned)
+- Hierarchy starts with empty space: Owen values negative space almost above everything else. It communicates without saying anything — restraint, professionalism, and the sense that every detail was considered. Prefer generous void over filling the canvas.
+- Strong typography hierarchy (after space: type, numbers, corners — see below)
+- Intentional spacing system and alignment
+- Subtle, satisfying animations
+- Interfaces should feel alive, not distracting
+- Owen prefers typography that feels a bit brutal and abstract — editorial tension, not generic SaaS.
+- Main titles: very large, bold, and dominant.
+- Hierarchy via numbers (01, 02, …): treat as a first-class visual system — they may read large with semi-blur, or small and sharp; use for structure and rhythm.
+- Sometimes use one uniform face in all caps for a section or label system (disciplined, not random).
+- Page corners: each viewport should feel considered — subtle marks, labels, frames, or meta text in the corners (tasteful, not noisy).
+
+Avoid:
+- Generic startup UI
+- Overused patterns with no personality
+- Excessive gradients/flashy effects
+- Cluttered layouts
+
+Target Visual Quality:
+- Apple-level clarity
+- Pinterest-level inspiration
+- Slight edge from fashion/art influence
+
+UI Style Guidelines:
+- Colors & materials (canonical — do not default to warm or saturated accents):
+  - Core palette: clean **white** (#fff) for the main page field, **true black**, and **grey** for secondary surfaces and hairlines. Use **greyish off-white** only for tinted bands or cards (`--section-tint`), not as the global page fill unless a specific section calls for it. No orange; avoid purple or rainbow accents unless Owen asks.
+  - **Blur** is part of the visual system (frosted nav, scroll-reveal blur resolving to sharp type, backdrop-filter) — treat it like a tonal layer, not decoration spam.
+  - Contrast hierarchy: black text on off-white for primary reading; muted greys for secondary; hairline borders with low-alpha black/grey.
+  - **Black on black** (optional, never required): Owen likes it when one plane reads **matte** (soft, flat, absorbs light) and another reads **slick / shiny** (tight highlight gradient, specular edge, or glass). This is **hard to read** — only use for **large** elements (hero-scale type, big numerals, section shells) where legibility stays effortless. Do not use black-on-black for body copy or small UI.
+  - **Shine on black**: subtle highlights (diagonal gloss, thin light rim) can sit on large dark surfaces; keep it restrained and test contrast.
+  - If a reference site (e.g. example portfolios) uses bold color fills, **do not import those hues** — borrow motion and composition only; keep Owen’s neutrals.
+- Typography:
+  - Clean sans-serif (SF Pro / Inter / Helvetica Neue feel) as a base; layer in brutal/abstract hierarchy (big bold titles, numeric index system, optional all-caps bands).
+  - Clear hierarchy (large hero text, smaller support text) — outside the home hero, lean into scroll-reveal type motion (see Interaction).
+  - Breathing room and readable line spacing
+- Spacing (non-negotiable):
+  - Empty space is a primary design voice, not leftover area — use it to structure attention and signal confidence.
+  - Generous padding and margins; resist crowding; let sections breathe.
+  - Consistent vertical rhythm
+  - No cramped sections
+- Components:
+  - Rounded corners generally 8px-16px
+  - Soft shadows
+  - Clean card systems where useful
+
+Interaction + Motion Requirements:
+- Motion quality is high priority.
+- Scroll is a primary canvas: prefer rich, layered motion — multiple animated properties (opacity, blur, translate, scale, stagger) tied to scroll position or intersection, not a single fade everywhere.
+- First-time reveal: much of the text should slide up slightly, ease in opacity, and use a touch of blur that resolves as it settles (blur + fade + slide — tuned so it stays readable and performant).
+- Include many interactive elements: hovers, toggles, draggable or playful details where appropriate; surprise and delight without breaking usability.
+- Use:
+  - Subtle hover states
+  - Smooth transitions (200ms-400ms baseline)
+  - Small scale/opacity shifts
+  - Staggered children and scroll-driven choreography where it reinforces hierarchy
+- Avoid:
+  - Heavy gimmicks
+  - Distracting animations
+  - Motion that hurts readability or accessibility (respect prefers-reduced-motion)
+- Desired feel:
+  - Responsive
+  - Intentional
+  - Slightly premium
+  - Interesting UI/UX — memorable patterns, clear feedback, product-real behaviors
+- Navigation behavior requirement:
+  - Sticky/floating rectangular nav surface with smooth corners and blur background.
+  - Nav should sit slightly lower from top to reveal its shape.
+  - On scroll, nav should dynamically condense (notably reduced width) with smooth transition.
+
+Mobile-First Requirement (Vital):
+- Entire website must be fully mobile friendly.
+- All sections, navigation, interactions, and typography must adapt cleanly across phone/tablet/desktop.
+- No layout breakage, clipping, or cramped spacing at smaller sizes.
+
+Product Thinking Principles:
+1) User flow clarity
+2) Simplicity first, enhancement second
+3) Real-world usability (not just Dribbble visuals)
+4) Logical feature grouping
+5) Scalable systems
+
+Always ask:
+- "Would this actually work as a real product?"
+
+Tone + Copy Direction:
+- Direct and clear
+- Slightly casual, still professional
+- No corporate buzzwords
+- No cliche design fluff
+- **Typography (site copy):** Do not use the em dash (—, Unicode U+2014) in any user-facing website text (headlines, body, labels, buttons, alt text where it reads as prose). Prefer a comma, period, colon, parentheses, or “ / ” between ideas. Ordinary hyphens in compound words (e.g. full-stack) and code are fine.
+- About Owen: reasonable, humble, and accurate, confident enough to be clear, never boastful or overblown. Facts over hype.
+
+Preferred example:
+- "I design and build products people actually use"
+
+Disallowed example:
+- "Crafting delightful digital experiences"
+
+When Generating UI:
+- Structured, clean layouts
+- Prioritize hierarchy over decoration — and prioritize empty space before piling on type or ornament
+- Use whitespace intentionally as the main compositional tool
+- Include realistic product components
+- Think in reusable systems
+
+When Generating Code:
+- Clean, readable, production-ready
+- No unnecessary complexity
+- Modern best practices
+- Styling consistency (Tailwind or clean CSS)
+
+Collaboration Constraints:
+- Owen is not a beginner.
+- Do not oversimplify.
+- Do not explain basics unless asked.
+- Make strong design decisions.
+- Proactively suggest improvements like a senior product designer.
+
+Implementation Constraints (do not violate unless Owen explicitly requests):
+- Home page hero (`.hero-editorial` / first-screen hero on `index.html`): do not redesign or restructure — leave layout, copy structure, and hero-specific treatment as-is.
+
+Current Work Log:
+- Home “Selected work” preview art only: `PinHaus-New-File.png` (PinHaus), `BandHouse-New-File.png` (BandHouse), project root paths. Case study pages use their own hero placeholders or assets, not these files.
+- Created this canonical context document.
+- Captures goals, style system, interaction principles, tone, and implementation direction.
+- Intended to be the source of truth for all future agents.
+- Updated: brutal/abstract typography direction, numeric hierarchy, corner treatments, scroll-rich motion (slide/blur/fade reveals), humble copy tone, product-design-first scope, UI/UX hiring alignment, home hero locked.
+- Updated: empty space / negative space as top hierarchy priority — restraint, professionalism, detail-minded composition.
+- Updated: neutral-only palette (white / black / grey off-white + blur); no orange; optional matte-vs-gloss black-on-black for large type/surfaces only; shine on black sparingly.

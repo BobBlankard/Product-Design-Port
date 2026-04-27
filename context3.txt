@@ -1,0 +1,118 @@
+Context 3 - Build Handoff (Current Implementation State)
+
+Date:
+- 2026-03-19
+
+What was built in this pass:
+- Created a complete first-pass portfolio website scaffold:
+  - `index.html`
+  - `styles.css`
+  - `script.js`
+- Implemented:
+  - Sticky top navigation
+  - Hero section with CTA buttons
+  - Selected work cards (PinHaus, BandHouse)
+  - Capabilities section
+  - About section
+  - Contact footer
+- Added interaction/motion system:
+  - Section reveal-on-scroll via IntersectionObserver
+  - Hover lift on cards and buttons
+  - 200-400ms style interaction timings with smooth easing
+- Added visual foundation:
+  - Dark neutral theme
+  - Rounded corners, soft borders, subtle depth
+  - Typography hierarchy using Inter
+  - Consistent spacing rhythm and container constraints
+
+Why this implementation approach:
+- Reference files are Framer exports with compressed/generated DOM and external runtime scripts.
+- Fastest path to maintainable production code is recreating layout/motion language in clean semantic HTML/CSS/JS (not copying generated Framer DOM one-to-one).
+- This gives Owen editable content regions and scalable structure.
+
+Current parity status vs inspiration:
+- Achieved:
+  - Minimal dark aesthetic
+  - Large type-driven hero
+  - Card-based project presentation
+  - Soft premium motion language
+- Not yet fully matched:
+  - Exact section sequence and spacing ratios from source
+  - Exact animation choreography and stagger timings
+  - Any image/media assets from source (none were local in downloaded folders)
+  - Fine-grain typographic details (letter-fit, per-breakpoint tuning)
+
+Immediate next tasks (high priority):
+1) Deep-parse source HTML for exact section order and spacing rhythm.
+2) Implement animation timeline parity:
+   - entry delays
+   - per-component stagger
+   - hover timing calibration
+3) Add actual project thumbnails/media (from Owen assets).
+4) Convert placeholder links/content into a centralized editable data structure.
+5) Build dedicated case-study pages mirroring the reference product page behavior.
+6) Maintain dynamic nav behavior:
+   - floating rounded rectangle style
+   - sticky behavior
+   - width reduction on scroll with smooth transition
+7) Maintain strict mobile-first QA on every change.
+
+Recommended architecture next:
+- Keep landing page in `index.html` for now.
+- Add:
+  - `case-study-pinhaus.html`
+  - `case-study-bandhouse.html`
+  - shared styles in `styles.css`
+  - shared interactions in `script.js`
+- If scaling, migrate to Next.js later once visual parity is approved.
+
+Editable zones for Owen:
+- Hero headline/subcopy/buttons in `index.html`
+- Work card text and tags in `index.html`
+- Contact links in footer
+
+Do not change without confirming:
+- Core spacing scale and radius system in `styles.css`
+- Motion easing curve and reveal timing
+- Neutral palette baseline
+- Home page hero (first screen on `index.html`): frozen — no layout/visual redesign unless Owen explicitly requests (see `context.txt`).
+
+Direction updates (see `context.txt` for full detail):
+- Palette: **white page background**; black; grey; optional **section tint** (`--section-tint`) for rhythm; blur — **no orange**; no purple accent by default. Optional black-on-black = large type/surfaces only. `contextexampleweb.txt` = motion reference, not Brandin colors.
+- Hierarchy: empty space / negative space first — void as composition, not filler; restraint and professionalism.
+- Typography: brutal/abstract edge; very bold large titles; numbers for hierarchy (optional blur at large sizes); uniform all-caps in places; corner treatments on viewports.
+- Motion: scroll-heavy choreography (multiple properties, stagger); text on first reveal: slide up + blur resolving + fade; more interactive elements.
+- Copy: humble, accurate; site content product-design + UI/UX credible; primary job goal product design.
+
+Quality checklist for next agent:
+- Empty space reads as intentional — no accidental crowding; rhythm and margins feel confident.
+- Validate mobile layout at <=640px and tablet <=1024px.
+- Confirm nav condenses smoothly on scroll on desktop and mobile.
+- Check keyboard focus visibility for links/buttons.
+- Ensure contrast remains readable after typography refinements (including blur-on-reveal — must not harm legibility).
+- Rich scroll motion is desired; avoid gimmicks that obscure content or ignore `prefers-reduced-motion`.
+- Preserve direct, non-buzzword copy tone; keep self-description humble and accurate.
+
+Files changed this pass:
+- Added `index.html`
+- Added `styles.css`
+- Added `script.js`
+- Added `context3.txt`
+
+Recent update notes:
+- 2026-03-24: Canonical context updated — brutal/abstract typography, numeric hierarchy + corner details, scroll-rich blur/slide/fade reveals, interactive density, humble accurate copy, product-design-first + UI/UX alignment; **home hero on `index.html` is frozen** for agents unless Owen requests changes.
+- 2026-03-24: Empty space elevated as top hierarchy priority — generous void, restraint, professionalism.
+- 2026-03-24: Neutral-only color direction documented; CSS tokens shifted off purple wash toward grey off-white field.
+- Header behavior split by page type:
+  - Home page uses normal sticky top rectangular header that slides out on scroll down.
+  - About/case-study style pages keep floating rounded blur nav that condenses on scroll.
+- Home contact links updated:
+  - Email: `mailto:o.n.doherty@gmail.com`
+  - LinkedIn: `https://www.linkedin.com/in/owen-doherty-48a741212/`
+  - Art Portfolio: `https://owendohertyworks.com/art/`
+- Hero “first screen” fold:
+  - `.hero-editorial` uses `height: calc(100svh - var(--home-header-h))` so header + hero ≈ one viewport (bio stays visible on load; sticky header was stacking with `100vh` hero before).
+  - `--home-header-h` uses `--home-nav-row-h` (68px desktop, 60px mobile) plus `env(safe-area-inset-top)` only — home bar stays flush (no `--site-header-pad-top`).
+- Floating nav (about / case studies):
+  - `header.site-header` has `padding-top: max(10px, safe-area)` (`--site-header-pad-top`) so the float gap stays with sticky scroll.
+  - Condensed-on-scroll keeps `margin-top: 14px` on `.nav-row` (was 8px) so the pill doesn’t tuck under the viewport when scrolling.
