@@ -376,7 +376,7 @@ section.hero.hero-editorial {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  background-color: #f5f3ef;
+  background-color: #f7f7f4;
   font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
