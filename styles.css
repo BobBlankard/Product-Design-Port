@@ -376,7 +376,7 @@ section.hero.hero-editorial {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  background-color: #ffffff;
+  background-color: #f5f3ef;
   font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -443,10 +443,12 @@ section.hero.hero-editorial {
   max-width: 100%;
   max-height: min(22svh, 180px);
   height: auto;
-  background: #d9d9d9;
+  background: transparent;
   border: none;
-  border-radius: 0;
-  box-shadow: none;
+  border-radius: 2px;
+  object-fit: contain;
+  object-position: center;
+  filter: none;
   flex-shrink: 1;
 }
 
@@ -908,6 +910,30 @@ h3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
+}
+
+.about-hiring-note {
+  border-top: 1px solid rgba(16, 18, 26, 0.12);
+  padding-top: clamp(16px, 2.8vw, 28px);
+  max-width: min(920px, 100%);
+}
+
+.about-hiring-note__kicker {
+  margin: 0 0 clamp(10px, 1.8vw, 16px);
+  font-family: var(--font-display);
+  font-size: clamp(0.78rem, 1vw, 0.9rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(16, 18, 26, 0.58);
+}
+
+.about-hiring-note__text {
+  margin: 0;
+  max-width: 74ch;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.35vw, 1.16rem);
+  line-height: 1.72;
 }
 
 .case-page .section {
